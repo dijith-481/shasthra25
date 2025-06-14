@@ -6,9 +6,9 @@ export const About = () => {
   return (
     <section
       id="about"
-      className="relative w-full py-64  z-4  min-h-[80svh] h-auto  flex justify-center items-center   translate-y-[-80px]   "
+      className="relative w-full py-64  z-4 pointer-events-none  min-h-[120svh] h-auto  flex justify-center items-center      "
     >
-      <div className="absolute top-0 left-0 w-[200%] translate-x-[-25%] h-full blur-[80px] bg-evening-sea-950"></div>
+      <div className="absolute top-0 left-0 w-[200%] translate-x-[-25%] h-full blur-3xl bg-evening-sea-950"></div>
 
       <div className="absolute container      rounded-md h-full w-3/4 justify-center items-center flex flex-col  ">
         <motion.h2
@@ -38,11 +38,11 @@ export const About = () => {
           deleniti earum ducimus minima. Ut sint nulla quaerat error.
         </motion.p>
       </div>
-      <div className="absolute top-0 left-0 w-full h-full z-10">
-        <Suspense fallback={null}>
-          <TechParticles />
-        </Suspense>
-      </div>
+      {/* <div className="absolute top-0 left-0 w-full h-full z-10"> */}
+      {/*   <Suspense fallback={null}> */}
+      {/*     <TechParticles /> */}
+      {/*   </Suspense> */}
+      {/* </div> */}
     </section>
   );
 };
