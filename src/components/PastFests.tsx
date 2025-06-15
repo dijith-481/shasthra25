@@ -66,7 +66,6 @@ export const PastFests = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
     if (!isOpen) {
@@ -107,7 +106,7 @@ export const PastFests = () => {
             animate={{ opacity: 1, scale: 1, filter: "blur(40px)" }}
             exit={{ opacity: 0, scale: 1.0, filter: "blur(20px)" }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="absolute inset-0 z-0 md:h-[120dvh] w-full "
+            className="absolute inset-0 z-0 md:h-[100dvh] w-full "
           >
             <img
               src={activeFest.imageUrl}
@@ -147,7 +146,7 @@ export const PastFests = () => {
                 style={{
                   borderColor: fest.color,
                 }}
-                className="w-20 h-20 md:w-28 md:h-28 rounded-full object-cover border-0 hover:border-2 border-white/10  hover:scale-105 backdrop-blur-2xl transition-all duration-300"
+                className="w-20 h-20 md:w-28 md:h-28 rounded-full object-cover border-0 hover:border-2 border-r-evening-sea-100/10  hover:scale-105 backdrop-blur-2xl transition-all duration-300"
               />
             </div>
           ))}
