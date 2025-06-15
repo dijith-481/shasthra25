@@ -1,32 +1,17 @@
-import { Suspense } from "react";
-import { motion } from "framer-motion";
-import { TechParticles } from "./TechParticles";
-
 export const About = () => {
   return (
     <section
       id="about"
-      className="relative w-full py-64  z-4 pointer-events-none  min-h-[120svh] h-auto  flex justify-center items-center      "
+      className="relative w-full    overflow-visible h-3/4    md:min-h-dvh   flex-col  flex justify-center items-center 
+overflow-x-clip
+      "
     >
-      <div className="absolute top-0 left-0 w-[200%] translate-x-[-25%] h-full blur-3xl bg-evening-sea-950"></div>
+      <div className="absolute top-0 left-0  z-1 w-[200vw] translate-x-[-25%]  h-full   blur-2xl  md:blur-3xl bg-evening-sea-950  "></div>
 
-      <div className="absolute container      rounded-md h-full w-3/4 justify-center items-center flex flex-col  ">
-        <motion.h2
-          initial={{ opacity: 0, y: 80, scaleY: 0.5 }}
-          whileInView={{ opacity: 1, y: 0, scaleY: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          // viewport={{ once: true }}
-          className="text-6xl font-bold py-8 tracking-tighter"
-        >
-          About
-        </motion.h2>
+      <div className=" rounded-md md:h-full h-3/4 md:w-3/4 w-full px-4  py-18 justify-center z-2   items-center flex flex-col  ">
+        <h2 className="text-6xl font-bold py-8 tracking-tighter">About</h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 80, scaleY: 0.5 }}
-          whileInView={{ opacity: 1, y: 0, scaleY: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="text-xl text-center text-evening-sea-100"
-        >
+        <p className="md:text-xl text-sm pb-8 text-center text-evening-sea-100">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore
           laborum neque dolores reprehenderit, reiciendis saepe error minus, ad
           impedit odio eligendi, deleniti earum ducimus minima. Ut sint nulla
@@ -36,13 +21,8 @@ export const About = () => {
           Ut sint nulla quaerat error. elit. Tempore laborum neque dolores
           reprehenderit, reiciendis saepe error minus, ad impedit odio eligendi,
           deleniti earum ducimus minima. Ut sint nulla quaerat error.
-        </motion.p>
+        </p>
       </div>
-      {/* <div className="absolute top-0 left-0 w-full h-full z-10"> */}
-      {/*   <Suspense fallback={null}> */}
-      {/*     <TechParticles /> */}
-      {/*   </Suspense> */}
-      {/* </div> */}
     </section>
   );
 };
