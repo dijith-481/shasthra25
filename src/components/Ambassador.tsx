@@ -2,7 +2,7 @@ export const Ambassador = () => {
   return (
     <section
       id="ambassador"
-      className="relative w-full    overflow-visible h-3/4    md:min-h-dvh   flex-col  flex justify-center items-center 
+      className="relative w-full    overflow-visible h-auto    md:min-h-dvh   flex-col  flex justify-center items-center 
 overflow-x-clip
       "
     >
@@ -26,7 +26,7 @@ overflow-x-clip
           }}
           className="text-xs md:text-sm shadow text-evening-sea-50 hover:bg-evening-sea-50 hover:text-evening-sea-950 z-10 mix-blend-difference hover:opacity-100  mt-2 rounded-full backdrop-blur-2xl px-6 md:px-10 py-1 border border-evening-sea-50  decoration-2  decoration-white/50 hover:decoration-white transition-all "
         >
-          visit
+          become an ambassador
         </a>
       </div>
     </section>

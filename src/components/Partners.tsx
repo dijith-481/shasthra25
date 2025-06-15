@@ -84,7 +84,7 @@ export const Partners = () => {
       }
       timeoutRef.current = setTimeout(() => {
         setActivePartner(null);
-      }, 4000);
+      }, 8000);
     } else if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -129,7 +129,7 @@ export const Partners = () => {
         )}
       </AnimatePresence>
 
-      <div className="w-full px-4 pt-20 z-10 h-full flex flex-col justify-center items-center">
+      <div className="w-full px-4 py-20 z-10 h-full flex flex-col justify-center items-center">
         <motion.h2
           className="text-4xl md:text-5xl font-bold pb-6  text-evening-sea-50"
           animate={{

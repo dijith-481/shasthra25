@@ -74,7 +74,7 @@ export const PastFests = () => {
       }
       timeoutRef.current = setTimeout(() => {
         setActiveFest(null);
-      }, 4000);
+      }, 8000);
     } else if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }

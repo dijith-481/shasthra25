@@ -54,21 +54,21 @@ export function ImageCarousel() {
       <AnimatePresence initial={false} mode="sync">
         <motion.div
           key={images[currentIndex]}
-          initial={{ filter: "blur(100px)", opacity: 0 }}
+          initial={{ filter: "blur(80px)", opacity: 0 }}
           animate={{ filter: "blur(20px)", opacity: 1 }}
-          exit={{ filter: "blur(100px)", opacity: 0 }}
+          exit={{ filter: "blur(80px)", opacity: 0 }}
           transition={{ duration: 1, ease: "linear" }}
-          className="absolute inset-0 z-0 md:h-[120dvh] w-full "
+          className="absolute inset-0 z-0 md:h-[100dvh] w-full "
         >
           <img
             src={images[currentIndex]}
             alt="Blurred background"
-            className="w-full h-full  object-cover   saturate-80 "
+            className="w-full h-full  object-cover  opacity-50  "
           />
         </motion.div>
       </AnimatePresence>
 
-      <div className="  w-full  px-4 py-20   h-full flex flex-col justify-center items-center bg-background">
+      <div className="  w-full  px-4 py-20   h-full flex flex-col justify-center items-center ">
         <div className="relative aspect-video md:w-[60%]  w-[90%]  flex flex-row gap-2 items-center justify-center">
           {images.map((image, index) => {
             const isCenter = index === currentIndex;
@@ -78,7 +78,6 @@ export function ImageCarousel() {
             const isFarRight = index == (currentIndex + 2) % images.length;
             const isFarLeft =
               index == (currentIndex + images.length - 2) % images.length;
-            const isSide = isLeft || isRight;
 
             let newLeft = "";
             let newWidth = "0";
@@ -113,7 +112,7 @@ export function ImageCarousel() {
                   ease: "linear",
                 }}
               >
-                <div className=" h-full aspect-video   ">
+                <div className=" h-full aspect-video">
                   <img
                     src={image}
                     className="object-cover h-full w-full"
