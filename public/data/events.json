@@ -1,0 +1,88 @@
+[
+  {
+    "id": 1,
+    "name": "Gaint Computer",
+    "image": "/eventImages/GaintComputer.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#4674AB",
+    "tags": ["cs", "top-rated", "selling fast"],
+    "type": "General"
+  },
+  {
+    "id": 2,
+    "name": "Chemicals",
+    "image": "/eventImages/chemicals.jpg",
+    "short_desc": "dolor sit amet, consectetur adipiscing elit",
+    "color": "#FCCE51",
+    "tags": ["breaking", "rising"],
+    "type": "Workshop"
+  },
+  {
+    "id": 3,
+    "name": "Circuit Design",
+    "image": "/eventImages/circuitDesign.jpg",
+    "short_desc": "delnetur adipiscing elit sit amet dolor some consectetur",
+    "color": "#F4DB25",
+    "tags": ["few left"],
+    "type": "General"
+  },
+  {
+    "id": 4,
+    "name": "Funzone",
+    "image": "/eventImages/funzone.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#EFB048",
+    "tags": ["rising", "selling fast"],
+    "type": "Conference"
+  },
+  {
+    "id": 5,
+    "name": "Men in Bottle",
+    "image": "/eventImages/menInBottle.jpg",
+    "short_desc": "conse Snippet somes  Swimming  _Swimming_some_s_sit_s_15",
+    "color": "#ABD3C5",
+    "tags": ["first in india"],
+    "type": "General"
+  },
+  {
+    "id": 6,
+    "name": "Perpectual Motion",
+    "image": "/eventImages/perpectualMotion.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#F1B231",
+    "tags": ["top seller"],
+    "type": "Talk"
+  },
+  {
+    "id": 7,
+    "name": "Petshow",
+    "image": "/eventImages/petshow.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#B8BD4C",
+    "type": "General"
+  },
+  {
+    "id": 8,
+    "name": "Rage Room",
+    "image": "/eventImages/rageRoom.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#EB6F1D",
+    "type": "General"
+  },
+  {
+    "id": 9,
+    "name": "Stupid Box",
+    "image": "/eventImages/stupidBox.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#73945B",
+    "type": "Talk"
+  },
+  {
+    "id": 10,
+    "name": "Code Swim",
+    "image": "/eventImages/swimming.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#56C3E5",
+    "type": "Workshop"
+  }
+]
