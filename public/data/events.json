@@ -6,7 +6,9 @@
     "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     "color": "#4674AB",
     "tags": ["cs", "top-rated", "selling fast"],
-    "type": "General"
+    "type": "General",
+    "prize": "1000",
+    "time": "2025-03-20T09:30:00Z"
   },
   {
     "id": 2,
@@ -15,7 +17,9 @@
     "short_desc": "dolor sit amet, consectetur adipiscing elit",
     "color": "#FCCE51",
     "tags": ["breaking", "rising"],
-    "type": "Workshop"
+    "type": "Workshop",
+    "prize": "5000",
+    "time": "2025-03-20T12:00:00Z"
   },
   {
     "id": 3,
@@ -24,7 +28,9 @@
     "short_desc": "delnetur adipiscing elit sit amet dolor some consectetur",
     "color": "#F4DB25",
     "tags": ["few left"],
-    "type": "General"
+    "type": "General",
+    "prize": "2000",
+    "time": "2025-03-21T12:00:00Z"
   },
   {
     "id": 4,
@@ -33,7 +39,9 @@
     "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     "color": "#EFB048",
     "tags": ["rising", "selling fast"],
-    "type": "Conference"
+    "type": "Conference",
+    "prize": "3000",
+    "time": "2025-03-21T09:00:00Z"
   },
   {
     "id": 5,
@@ -42,7 +50,9 @@
     "short_desc": "conse Snippet somes  Swimming  _Swimming_some_s_sit_s_15",
     "color": "#ABD3C5",
     "tags": ["first in india"],
-    "type": "General"
+    "type": "General",
+    "prize": "4000",
+    "time": "2025-03-22T12:00:00Z"
   },
   {
     "id": 6,
@@ -51,7 +61,9 @@
     "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     "color": "#F1B231",
     "tags": ["top seller"],
-    "type": "Talk"
+    "type": "Talk",
+    "prize": "6000",
+    "time": "2025-03-20T09:07:00Z"
   },
   {
     "id": 7,
@@ -59,7 +71,9 @@
     "image": "/eventImages/petshow.jpg",
     "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     "color": "#B8BD4C",
-    "type": "General"
+    "type": "General",
+    "prize": "2500",
+    "time": "2025-03-22T10:00:00Z"
   },
   {
     "id": 8,
@@ -67,7 +81,9 @@
     "image": "/eventImages/rageRoom.jpg",
     "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     "color": "#EB6F1D",
-    "type": "General"
+    "type": "General",
+    "prize": "1500",
+    "time": "2025-03-23T12:00:00Z"
   },
   {
     "id": 9,
@@ -75,7 +91,9 @@
     "image": "/eventImages/stupidBox.jpg",
     "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     "color": "#73945B",
-    "type": "Talk"
+    "type": "Talk",
+    "prize": "8000",
+    "time": "2025-03-24T12:00:00Z"
   },
   {
     "id": 10,
@@ -83,6 +101,8 @@
     "image": "/eventImages/swimming.jpg",
     "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     "color": "#56C3E5",
-    "type": "Workshop"
+    "type": "Workshop",
+    "prize": "10000",
+    "time": "2025-03-25T12:00:00Z"
   }
 ]

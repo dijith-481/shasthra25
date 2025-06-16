@@ -10,6 +10,8 @@ interface DropDownProps {
   onClose: () => void;
 }
 
+const MIN_WIDTH_PX = 96;
+
 export default function DropDown({
   options,
   selectedOption,
@@ -19,21 +21,27 @@ export default function DropDown({
   onClose,
 }: DropDownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ top: 0, left: 0, width: 0 });
+
+  const [position, setPosition] = useState({
+    top: 0,
+    left: 0,
+    width: 0,
+    translateX: 0,
+  });
   const [hasPositionBeenCalculated, setHasPositionBeenCalculated] =
     useState(false);
   const [shouldDropUp, setShouldDropUp] = useState(false);
 
   useLayoutEffect(() => {
-    console.log("triggerRef", triggerRef.current);
     if (!isOpen || !triggerRef.current) {
       setHasPositionBeenCalculated(false);
       return;
     }
 
     const updatePosition = () => {
-      console.log("triggerRef", triggerRef.current);
-      const triggerRect = triggerRef.current!.getBoundingClientRect();
+      if (!triggerRef.current) return;
+
+      const triggerRect = triggerRef.current.getBoundingClientRect();
       const dropdownHeight = dropdownRef.current?.scrollHeight || 0;
       const viewportHeight = window.innerHeight;
       const spaceBelow = viewportHeight - triggerRect.bottom;
@@ -44,6 +52,9 @@ export default function DropDown({
         spaceBelow < dropdownHeight + verticalOffset &&
         spaceAbove > spaceBelow + verticalOffset;
 
+      const finalWidth = Math.max(triggerRect.width, MIN_WIDTH_PX);
+      const translateX = (triggerRect.width - finalWidth) / 2;
+
       setShouldDropUp(shouldDropUpCalc);
 
       setPosition({
@@ -51,7 +62,8 @@ export default function DropDown({
           ? triggerRect.top - dropdownHeight - verticalOffset
           : triggerRect.bottom + verticalOffset,
         left: triggerRect.left,
-        width: triggerRect.width,
+        width: finalWidth,
+        translateX: translateX,
       });
 
       if (!hasPositionBeenCalculated) {
@@ -71,7 +83,6 @@ export default function DropDown({
 
   useEffect(() => {
     if (!isOpen) return;
-
     const handleClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
@@ -82,20 +93,17 @@ export default function DropDown({
         onClose();
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen, onClose, triggerRef]);
 
   useEffect(() => {
     if (!isOpen) return;
-
     const handleEscapeKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();
       }
     };
-
     document.addEventListener("keydown", handleEscapeKey);
     return () => document.removeEventListener("keydown", handleEscapeKey);
   }, [isOpen, onClose]);
@@ -108,16 +116,19 @@ export default function DropDown({
     <div
       ref={dropdownRef}
       id="dropdown"
-      className="fixed   bg-white/70 flex min-w-24 flex-col backdrop-blur-lg rounded-xl translate-x-[-25%] overflow-hidden z-9999   transform-3d "
+      className="fixed bg-white/70 flex min-w-24 flex-col backdrop-blur-lg rounded-xl overflow-hidden z-[9999] transform-3d"
       style={{
         top: position.top,
         left: position.left,
-        // minWidth: position.width,
+        width: position.width,
         maxHeight: "30vh",
         overflowY: "auto",
         height: hasPositionBeenCalculated ? "auto" : "0px",
         transformOrigin: shouldDropUp ? "bottom" : "top",
-        transform: hasPositionBeenCalculated ? "scaleY(1)" : "scaleY(0.9)",
+
+        transform: `translateX(${position.translateX}px) ${
+          hasPositionBeenCalculated ? "scaleY(1)" : "scaleY(0.9)"
+        }`,
         transition: "transform 0.1s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
     >
@@ -126,7 +137,6 @@ export default function DropDown({
           key={optionKey}
           onClick={() => {
             onSelect(optionKey);
-            onClose();
           }}
           className={`w-full text-left px-4 py-2 text-sm whitespace-nowrap ${
             selectedOption === optionKey
