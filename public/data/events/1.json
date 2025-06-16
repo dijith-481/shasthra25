@@ -1,0 +1,14 @@
+{
+  "about": "Dive into the world of automation and robotics in this hands-on workshop. You will learn the fundamentals of building and programming a simple robot from scratch. No prior experience is required, just a curious mind and a passion for technology!",
+  "rules": "1. Teams can have a maximum of 3 members.\n2. All required components will be provided at the venue.\n3. Plagiarism or copying code from other teams will result in immediate disqualification.\n4. The judges' decision is final.",
+  "format": "The workshop is divided into two sessions. The morning session will cover the theoretical concepts and an introduction to the hardware. The afternoon session will be a practical, hands-on building and programming competition. Teams will be judged on creativity, efficiency, and task completion.",
+  "contact": {
+    "id": "contact-1",
+    "name": "Alex Ray",
+    "email": "alex.r@shasthra25.com",
+    "phone": "+1 234 567 890"
+  },
+  "isClosed": false,
+  "fee": 100,
+  "venue": "somwhere"
+}
