@@ -11,19 +11,17 @@ export interface EventType {
   color: string;
   tags?: string[];
   type: string;
+  prize: string;
+  time: string;
 }
 
 interface EventCardProps {
   event: EventType;
   setActive: React.Dispatch<React.SetStateAction<string | null>>;
-  index: number;
 }
 
-interface CardStyle extends CSSProperties {
-  "--glow-color": string;
-}
-
-export default function EventCard({ event, setActive, index }: EventCardProps) {
+export default function EventCard({ event, setActive }: EventCardProps) {
+  const localTime = new Date(event.time).toLocaleString();
   return (
     <Link
       href={`/events/${event.id}`}
@@ -36,6 +34,9 @@ export default function EventCard({ event, setActive, index }: EventCardProps) {
         SHASTHRA'25
       </div>
       <div className="relative w-full h-full overflow-hidden rounded-2xl   ">
+        <div className="absolute top-2 left-2 z-6 mix-blend-difference text-white">
+          $ {event.prize}
+        </div>
         <div
           className="absolute bottom-0 left-0 z-1 w-128 blur-2xl translate-x-[-25%] h-5/6 translate-y-[30%] saturate-70 group-hover:saturate-100 transition-all duration-500 ease-linear "
           style={{
@@ -69,7 +70,13 @@ export default function EventCard({ event, setActive, index }: EventCardProps) {
 
         <div className="absolute bottom-0 left-0 z-3 px-3 gap-0.5 flex items-start justify-center w-full flex-col">
           <h3 className="text-2xl font-bold text-white">{event.name}</h3>
+          <p className="text-sm text-white/70 mix-blend-difference font-inter">
+            {event.type}
+          </p>
           <p className="text-xs text-white font-inter">{event.short_desc}</p>
+          <p className="text-xs text-white font-inter h-0 opacity-0 group-hover:h-4 group-hover:opacity-100 transition-all ease-in-out duration-500 ">
+            {localTime}{" "}
+          </p>
           <div className="flex flex-row gap-x-0.5 pb-2 items-start">
             {event.tags?.map((tag, index) => (
               <div
@@ -81,10 +88,8 @@ export default function EventCard({ event, setActive, index }: EventCardProps) {
             ))}
           </div>
 
-          <button className="w-full mb-3 rounded-3xl backdrop-blur-3xl bg-white h-10 text-black z-6 ">
-            <span className="blur-xs group-hover:blur-none transition-all ease-in-out duration-500">
-              Learn More
-            </span>
+          <button className="w-full mb-3 rounded-3xl backdrop-blur-sm bg-white/50 h-10 text-black z-6 ">
+            Learn More
           </button>
         </div>
       </div>

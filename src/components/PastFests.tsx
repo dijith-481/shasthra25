@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation";
 
 const festLogos = [
   {
@@ -56,6 +55,8 @@ const festLogos = [
 const leftLogos = festLogos.slice(0, 4);
 const rightLogos = festLogos.slice(4, 8);
 
+const INTERVAL = 4000;
+
 export const PastFests = () => {
   const [activeFest, setActiveFest] = useState<{
     year: number;
@@ -65,7 +66,34 @@ export const PastFests = () => {
   } | null>(null);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalIdRef = useRef<NodeJS.Timeout | null>(null);
+
+  const startAutoplay = () => {
+    if (intervalIdRef.current) {
+      clearInterval(intervalIdRef.current);
+    }
+    intervalIdRef.current = setInterval(() => {
+      nextFest(true);
+    }, INTERVAL);
+  };
+
+  const nextFest = (isAutoplay = false) => {
+    setCurrentIndex((prev) => (prev + 1) % (festLogos.length + 1));
+    if (!isAutoplay) {
+      startAutoplay();
+    }
+  };
+
+  useEffect(() => {
+    if (currentIndex === festLogos.length) {
+      setActiveFest(null);
+    } else {
+      setActiveFest(festLogos[currentIndex]);
+    }
+    setIsOpen(true);
+  }, [currentIndex]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -86,11 +114,50 @@ export const PastFests = () => {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    startAutoplay();
+    return () => {
+      if (intervalIdRef.current) {
+        clearInterval(intervalIdRef.current);
+      }
+    };
+  }, []);
+
   const setFestToNull = () => {
     setIsOpen(false);
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
+    startAutoplay();
+  };
+
+  const handleMouseEnter = (fest: {
+    year: number;
+    name: string;
+    imageUrl: string;
+    color: string;
+  }) => {
+    if (intervalIdRef.current) {
+      clearInterval(intervalIdRef.current);
+    }
+    setActiveFest(fest);
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setFestToNull();
+  };
+
+  const handleHeaderHover = () => {
+    if (intervalIdRef.current) {
+      clearInterval(intervalIdRef.current);
+    }
+    setActiveFest(null);
+    setIsOpen(false);
+  };
+
+  const handleHeaderLeave = () => {
+    startAutoplay();
   };
 
   return (
@@ -125,107 +192,105 @@ export const PastFests = () => {
         )}
       </AnimatePresence>
 
-      <div className="relative z-5  mx-auto px-4 py-20  grid grid-cols-1 md:grid-cols-[1fr_2fr_1fr] gap-8 items-center w-full">
-        <div className="flex flex-row md:flex-col items-center justify-around md:justify-start gap-4 z-6">
-          {leftLogos.map((fest) => (
-            <div
-              key={fest.year}
-              onMouseEnter={() => {
-                setActiveFest(fest);
-                setIsOpen(true);
-              }}
-              // onClick={() => {
-              //   router.push(`/legacy/${fest.year}`);
-              // }}
-              onMouseLeave={setFestToNull}
-              className="cursor-pointer"
-            >
-              <img
-                src={fest.imageUrl}
-                alt={fest.name}
-                style={{
-                  borderColor: fest.color,
-                }}
-                className="w-20 h-20 md:w-28 md:h-28 rounded-full object-cover border-0 hover:border-2 border-r-evening-sea-100/10  hover:scale-105 backdrop-blur-2xl transition-all duration-300"
-              />
-            </div>
-          ))}
+      <div className="relative z-5 mx-auto px-4 py-20 flex flex-col items-center w-full">
+        <div
+          className="text-center mb-12"
+          onMouseEnter={handleHeaderHover}
+          onMouseLeave={handleHeaderLeave}
+        >
+          <h2 className="text-4xl md:text-6xl font-bold md:py-8 py-4 tracking-tighter cursor-pointer">
+            The Legacy of Innovation
+          </h2>
         </div>
 
-        <div className="text-center h-48 flex flex-col justify-center items-center w-full ">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeFest ? activeFest.year : "default"}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              {activeFest ? (
-                <div className="justify-center items-center flex flex-col w-full  ">
-                  <h3
-                    className="text-4xl md:text-6xl font-bold "
-                    style={{
-                      color: activeFest.color,
-                    }}
-                  >
-                    {activeFest.year}
-                  </h3>
-                  <p className="text-xl md:text-2xl mt-2 ">{activeFest.name}</p>
-                  <a
-                    href={`/legacy/${activeFest.year}`}
-                    style={{
-                      opacity: 0.5,
-                    }}
-                    className="text-xs md:text-sm shadow text-evening-sea-50 hover:bg-evening-sea-50 hover:text-evening-sea-950 z-10 mix-blend-difference hover:opacity-100  mt-2 rounded-full backdrop-blur-2xl px-6 py-1 border border-evening-sea-50  decoration-2  decoration-white/50 hover:decoration-white transition-all "
-                  >
-                    visit
-                  </a>
-                </div>
-              ) : (
-                <div className="justify-center items-center flex flex-col  w-full">
-                  <h2 className=" text-4xl md:text-6xl font-bold md:py-8 py-4 tracking-tighter">
-                    The Legacy of Innovation
-                  </h2>
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr_1fr] gap-8 items-center w-full">
+          <div className="flex flex-row md:flex-col items-center justify-around md:justify-start gap-4 z-6">
+            {leftLogos.map((fest) => (
+              <div
+                key={fest.year}
+                onMouseEnter={() => handleMouseEnter(fest)}
+                onMouseLeave={handleMouseLeave}
+                className="cursor-pointer"
+              >
+                <img
+                  src={fest.imageUrl}
+                  alt={fest.name}
+                  style={{
+                    borderColor: fest.color,
+                  }}
+                  className="w-20 h-20 md:w-28 md:h-28 rounded-full object-cover border-0 hover:border-2 border-r-evening-sea-100/10  hover:scale-105 backdrop-blur-2xl transition-all duration-300"
+                />
+              </div>
+            ))}
+          </div>
 
-                  <p className=" text-xs md:text-xl  text-center text-evening-sea-100 ">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Tempore laborum neque dolores reprehenderit, reiciendis
-                    saepe error minus, ad impedit odio eligendi, deleniti earum
-                    ducimus minima. Ut sint nulla quaerat error. Lorem ipsum
-                    laborum neque dolores reprehenderit, reiciendis saepe error
-                    sint nulla quaerat error.
-                  </p>
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
-        </div>
+          <div className="text-center h-48 flex flex-col justify-center items-center w-full ">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeFest ? activeFest.year : "default"}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                {activeFest ? (
+                  <div className="justify-center items-center flex flex-col w-full  ">
+                    <h3
+                      className="text-4xl md:text-6xl font-bold "
+                      style={{
+                        color: activeFest.color,
+                      }}
+                    >
+                      {activeFest.year}
+                    </h3>
+                    <p className="text-xl md:text-2xl mt-2 ">
+                      {activeFest.name}
+                    </p>
+                    <a
+                      href={`/legacy/${activeFest.year}`}
+                      style={{
+                        opacity: 0.5,
+                      }}
+                      className="text-xs md:text-sm shadow text-evening-sea-50 hover:bg-evening-sea-50 hover:text-evening-sea-950 z-10 mix-blend-difference hover:opacity-100  mt-2 rounded-full backdrop-blur-2xl px-6 py-1 border border-evening-sea-50  decoration-2  decoration-white/50 hover:decoration-white transition-all "
+                    >
+                      visit
+                    </a>
+                  </div>
+                ) : (
+                  <div className="justify-center items-center flex flex-col w-full">
+                    <p className="text-xs md:text-xl text-center text-evening-sea-100">
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                      Tempore laborum neque dolores reprehenderit, reiciendis
+                      saepe error minus, ad impedit odio eligendi, deleniti
+                      earum ducimus minima. Ut sint nulla quaerat error. Lorem
+                      ipsum laborum neque dolores reprehenderit, reiciendis
+                      saepe error sint nulla quaerat error.
+                    </p>
+                  </div>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-        <div className="flex flex-row md:flex-col items-center justify-around md:justify-start gap-8">
-          {rightLogos.map((fest) => (
-            <div
-              key={fest.year}
-              // onClick={() => {
-              //   router.push(`/legacy/${fest.year}`);
-              // }}
-              onMouseEnter={() => {
-                setActiveFest(fest);
-                setIsOpen(true);
-              }}
-              onMouseLeave={setFestToNull}
-              className="cursor-pointer"
-            >
-              <img
-                src={fest.imageUrl}
-                alt={fest.name}
-                style={{
-                  borderColor: fest.color,
-                }}
-                className="w-20 h-20 md:w-28 md:h-28 rounded-full object-cover border-0 border-white/10 hover:border-2 backdrop-blur-2xl hover:scale-105 transition-all duration-300"
-              />
-            </div>
-          ))}
+          <div className="flex flex-row md:flex-col items-center justify-around md:justify-start gap-8">
+            {rightLogos.map((fest) => (
+              <div
+                key={fest.year}
+                onMouseEnter={() => handleMouseEnter(fest)}
+                onMouseLeave={handleMouseLeave}
+                className="cursor-pointer"
+              >
+                <img
+                  src={fest.imageUrl}
+                  alt={fest.name}
+                  style={{
+                    borderColor: fest.color,
+                  }}
+                  className="w-20 h-20 md:w-28 md:h-28 rounded-full object-cover border-0 border-white/10 hover:border-2 backdrop-blur-2xl hover:scale-105 transition-all duration-300"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

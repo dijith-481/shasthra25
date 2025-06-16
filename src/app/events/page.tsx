@@ -1,8 +1,8 @@
 "use client";
-
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import EventCard, { EventType } from "@/components/EventCard";
 import { AnimatePresence, motion } from "framer-motion";
+import DropDown from "@/components/Ui/Dropdown";
 
 export default function EventsPage() {
   const [events, setEvents] = useState<EventType[]>([]);
@@ -10,9 +10,18 @@ export default function EventsPage() {
   const [active, setActive] = useState<string | null>(null);
   const [lastActiveColor, setLastActiveColor] = useState<string>("white");
   const [activeSort, setActiveSort] = useState<string>("All");
-  const [visibleEvents, setVisibleEvents] = useState<EventType[]>([]);
+
+  const [sortKey, setSortKey] = useState<string>("name");
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
   const activeEvent = active ? events.find((e) => e.id === active) : null;
+
+  const [isDropdownOpen, setIsdropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLButtonElement>(null);
+  const toggleDropdown = () => setIsdropdownOpen((prev) => !prev);
+  const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
+  const filterDropdownRef = useRef<HTMLButtonElement>(null);
+  const toggleFilterDropdown = () => setIsFilterDropdownOpen((prev) => !prev);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -33,18 +42,46 @@ export default function EventsPage() {
     fetchEvents();
   }, []);
 
-  useEffect(() => {
-    setVisibleEvents(
-      events.filter((event) => {
-        if (activeSort === "All") {
-          return true;
-        }
-        return event.type === activeSort;
-      }),
-    );
+  const visibleEvents = useMemo(() => {
+    const filtered = events.filter((event) => {
+      if (activeSort === "All") {
+        return true;
+      }
+      return event.type === activeSort;
+    });
 
+    const sorted = [...filtered].sort((a, b) => {
+      let valA: any, valB: any;
+
+      switch (sortKey) {
+        case "prize":
+          valA = parseInt(a.prize, 10) || 0;
+          valB = parseInt(b.prize, 10) || 0;
+          break;
+        case "time":
+          valA = new Date(a.time).getTime() || 0;
+          valB = new Date(b.time).getTime() || 0;
+          break;
+        case "name":
+        default:
+          valA = a.name.toLowerCase();
+          valB = b.name.toLowerCase();
+          return sortDirection === "asc"
+            ? valA.localeCompare(valB)
+            : valB.localeCompare(valA);
+      }
+
+      if (valA < valB) return sortDirection === "asc" ? -1 : 1;
+      if (valA > valB) return sortDirection === "asc" ? 1 : -1;
+      return 0;
+    });
+
+    return sorted;
+  }, [events, activeSort, sortKey, sortDirection]);
+
+  useEffect(() => {
     setActive(null);
-  }, [activeSort, events]);
+  }, [activeSort]);
 
   useEffect(() => {
     if (activeEvent) {
@@ -56,10 +93,9 @@ export default function EventsPage() {
     <main className="bg-gradient-to-b from-evening-sea-950 to-evening-sea-930">
       <section
         id="events"
-        className="relative overflow-hidden h-3/4 max-h-svh md:min-h-dvh flex flex-col  items-center w-full"
+        className="relative overflow-hidden  max-h-svh min-h-dvh flex flex-col  items-center w-full"
       >
         <AnimatePresence initial={false} mode="sync">
-          {/* FIX 4: Use activeEvent for all details to prevent mismatches. */}
           {activeEvent && (
             <motion.div
               key={activeEvent.id}
@@ -82,12 +118,12 @@ export default function EventsPage() {
             {activeEvent && (
               <motion.h2
                 key={activeEvent.id}
-                initial={{ color: "white", filter: "blur(4px)" }}
+                initial={{ color: "#ffffff", filter: "blur(4px)" }}
                 animate={{
                   color: activeEvent.color,
                   filter: "blur(3px)",
                 }}
-                exit={{ color: "white", filter: "blur(4px)" }}
+                exit={{ color: "#ffffff", filter: "blur(4px)" }}
                 transition={{ duration: 0.5, ease: "linear" }}
                 className="text-4xl md:text-6xl mix-blend-difference font-bold md:py-8 py-4 tracking-tighter cursor-pointer   "
               >
@@ -111,30 +147,88 @@ export default function EventsPage() {
           </div>
         ) : (
           <>
-            <div className="h-full max-w-4xl overflow-y-scroll p-4 w-full flex flex-wrap gap-4  justify-around">
+            <div className="h-full max-w-4xl overflow-y-scroll p-4 w-full flex flex-wrap gap-4 pb-20 justify-center">
               {visibleEvents.map((event) => (
-                <EventCard
-                  key={event.id}
-                  event={event}
-                  setActive={setActive}
-                  index={0}
-                />
+                <EventCard key={event.id} event={event} setActive={setActive} />
               ))}
             </div>
           </>
         )}
-        <div className="absolute  overflow-hidden  bottom-4 backdrop-blur-md text-black space-x-[-1rem]  rounded-full bg-white/70 flex flex-row items-center justify-center h-12 ">
-          {["All", "General", "Talk", "Conference", "Workshop"].map((item) => (
+        <div className="absolute bottom-4 h-12 flex gap-2 flex-row justify-center items-center">
+          <div className="hidden md:flex overflow-hidden h-full backdrop-blur-md text-black space-x-[-1rem] rounded-full bg-white/70 items-center justify-center">
+            {["All", "General", "Talk", "Conference", "Workshop"].map(
+              (item) => (
+                <button
+                  key={item}
+                  onClick={() => setActiveSort(item)}
+                  className={`text-sm ease-in-out duration-500 px-6 py-1.5 h-full min-w-24 hover:text-black transition-all
+        ${activeSort === item ? "bg-evening-sea-400/70 rounded-none z-15" : " z-14 hover:bg-evening-sea-300/70 rounded-4xl"}`}
+                >
+                  {item}
+                </button>
+              ),
+            )}
+          </div>
+
+          <div className="relative h-full flex w-48 md:hidden">
             <button
-              key={item}
-              onClick={() => setActiveSort(item)}
-              className={`text-sm   ease-in-out duration-500  px-6 py-1.5  h-full min-w-24 hover:text-black transition-all
-${activeSort === item ? "bg-emerald-300 rounded-none z-15" : " z-14 hover:bg-evening-sea-300/80 rounded-4xl"}
-`}
+              ref={filterDropdownRef}
+              onClick={toggleFilterDropdown}
+              className="w-full h-full rounded-4xl bg-white/70 backdrop-blur-md px-4 flex items-center justify-between text-black"
             >
-              {item}
+              <span className="font-semibold">{activeSort}</span>
+              <span className="text-xs">▼</span>
             </button>
-          ))}
+            <DropDown
+              options={{
+                All: "All",
+                General: "General",
+                Talk: "Talk",
+                Conference: "Conference",
+                Workshop: "Workshop",
+              }}
+              selectedOption={activeSort}
+              onSelect={(option: string) => {
+                setActiveSort(option);
+                toggleFilterDropdown();
+              }}
+              triggerRef={filterDropdownRef}
+              onClose={toggleFilterDropdown}
+              isOpen={isFilterDropdownOpen}
+            />
+          </div>
+
+          <button
+            className="rounded-4xl bg-white/70 h-full w-12 items-center flex justify-center text-black text-xl font-bold"
+            onClick={() =>
+              setSortDirection((prev) => (prev === "asc" ? "desc" : "asc"))
+            }
+            title={`Sort ${sortDirection === "asc" ? "Descending" : "Ascending"}`}
+          >
+            {sortDirection === "asc" ? "↑" : "↓"}
+          </button>
+          <button
+            className="rounded-4xl bg-white/70 h-full font-black aspect-square items-center flex justify-center text-black"
+            ref={dropdownRef}
+            onClick={toggleDropdown}
+          >
+            sort
+          </button>
+          <DropDown
+            options={{
+              name: "Name",
+              prize: "Prize",
+              time: "Time",
+            }}
+            selectedOption={sortKey}
+            onSelect={(option: string) => {
+              setSortKey(option);
+              toggleDropdown();
+            }}
+            triggerRef={dropdownRef}
+            onClose={toggleDropdown}
+            isOpen={isDropdownOpen}
+          />
         </div>
       </section>
     </main>
