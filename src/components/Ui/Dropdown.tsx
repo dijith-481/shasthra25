@@ -8,6 +8,7 @@ interface DropDownProps {
   triggerRef: React.RefObject<HTMLElement | null>;
   isOpen: boolean;
   onClose: () => void;
+  color?: string;
 }
 
 const MIN_WIDTH_PX = 96;
@@ -19,6 +20,7 @@ export default function DropDown({
   triggerRef,
   isOpen,
   onClose,
+  color,
 }: DropDownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -116,7 +118,7 @@ export default function DropDown({
     <div
       ref={dropdownRef}
       id="dropdown"
-      className="fixed bg-white/70 flex min-w-24 flex-col backdrop-blur-lg rounded-xl overflow-hidden z-[9999] transform-3d"
+      className="fixed bg-white/70 flex min-w-24 flex-col backdrop-blur-lg rounded-3xl overflow-hidden z-[9999] transform-3d"
       style={{
         top: position.top,
         left: position.left,
@@ -138,10 +140,14 @@ export default function DropDown({
           onClick={() => {
             onSelect(optionKey);
           }}
-          className={`w-full text-left px-4 py-2 text-sm whitespace-nowrap ${
+          style={{
+            backgroundColor:
+              selectedOption === optionKey ? color + "a0" : color + "80",
+          }}
+          className={`w-full text-center px-4 py-2 text-sm whitespace-nowrap ${
             selectedOption === optionKey
               ? "bg-evening-sea-300/50 text-white font-semibold"
-              : "text-black hover:bg-evening-sea-300/70 hover:text-black"
+              : "text-black opacity-70 hover:opacity-100 hover:text-black"
           }`}
         >
           {options[optionKey]}
