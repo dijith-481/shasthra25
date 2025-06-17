@@ -1,0 +1,143 @@
+[
+  {
+    "id": 100,
+    "name": "Sing Together",
+    "image": "/competitionImages/singTogether.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#49C2D3",
+    "tags": [" <3", "sing", "together"],
+    "type": "nonTech",
+    "time": "2025-03-20T00:00:00Z",
+    "prize": "1000"
+  },
+  {
+    "id": 101,
+    "name": "Circuit Design Penguin",
+    "image": "/competitionImages/circuitDesignPenguin.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#E95E63",
+    "tags": [" penguin", "circuit", "design"],
+    "type": "genTech",
+    "time": "2025-03-21T00:00:00Z",
+    "prize": "2000"
+  },
+  {
+    "id": 102,
+    "name": "Code Creature",
+    "image": "/competitionImages/codeCreature.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#96CAD8",
+    "tags": [" creature", "code"],
+    "type": "csTech",
+    "time": "2025-03-22T00:00:00Z",
+    "prize": "3000"
+  },
+  {
+    "id": 103,
+    "name": "Code Music",
+    "image": "/competitionImages/codeMusic.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#B6B5CA",
+    "tags": [" music", "code"],
+    "type": "csTech",
+    "time": "2025-03-21T12:00:00Z",
+    "prize": "500"
+  },
+  {
+    "id": 104,
+    "name": "Cooking Parrot",
+    "image": "/competitionImages/cookingParrot.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#E85952",
+    "tags": [" cook"],
+    "type": "nonTech",
+    "time": "2025-03-21T12:00:00Z",
+    "prize": "5000"
+  },
+  {
+    "id": 105,
+    "name": "Disco Bird",
+    "image": "/competitionImages/discoBird.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#3FA5CB",
+    "type": "nonTech",
+    "time": "2025-03-21T12:00:00Z",
+    "prize": "3000"
+  },
+  {
+    "id": 106,
+    "name": "Elephant Rider",
+    "image": "/competitionImages/elephantRider.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#BEADD1",
+    "tags": [" ride", "elephant"],
+    "type": "nonTech",
+    "time": "2025-03-21T12:00:00Z",
+    "prize": "5000"
+  },
+  {
+    "id": 107,
+    "name": "Fish Code",
+    "image": "/competitionImages/fishCode.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#01A6C1",
+    "tags": [" fish", "code"],
+    "type": "csTech",
+    "time": "2025-03-22T12:00:00Z",
+    "prize": "5000"
+  },
+  {
+    "id": 108,
+    "name": "Happy Cat",
+    "image": "/competitionImages/happyCat.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#DCAC3F",
+    "type": "nonTech",
+    "time": "2025-03-22T09:00:00Z",
+    "prize": "500"
+  },
+  {
+    "id": 109,
+    "name": "Magic Fox",
+    "image": "/competitionImages/magicFox.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#E46900",
+    "tags": [" magic", "fox"],
+    "type": "nonTech",
+    "time": "2025-03-20T09:00:00Z",
+    "prize": "5001"
+  },
+  {
+    "id": 110,
+    "name": "Pair Coding",
+    "image": "/competitionImages/pairCoding.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#EFDC86",
+    "tags": [" pair", "coding"],
+    "type": "csTech",
+    "time": "2025-03-21T08:00:00Z",
+    "prize": "5000"
+  },
+  {
+    "id": 111,
+    "name": "The Art",
+    "image": "/competitionImages/theArt.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#90CCCF",
+    "tags": [" art", "painting"],
+    "type": "nonTech",
+    "time": "2025-03-21T09:00:00Z",
+    "prize": "5000"
+  },
+  {
+    "id": 112,
+    "name": "The Quarentine Code",
+    "image": "/competitionImages/theQuarentineCode.jpg",
+    "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "color": "#FB9A63",
+    "tags": [" code", "quarentine"],
+    "type": "csTech",
+    "time": "2025-03-22T08:00:00Z",
+    "prize": "5000"
+  }
+]
