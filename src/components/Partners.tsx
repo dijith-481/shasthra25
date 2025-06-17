@@ -1,28 +1,29 @@
 import { useEffect, useRef, useState } from "react";
 import { Marquee } from "./Marquee";
 import { AnimatePresence, motion } from "framer-motion";
+import { useColorContext } from "@/context/color";
 
 const partners = [
   {
-    type: "Platinum Sponser",
+    type: "Platinum Partner",
     name: "something",
     logoUrl: "something.jpg",
     color: "#91C9D7",
   },
   {
-    type: "Platinum Sponser",
+    type: "Platinum Partner",
     name: "seal",
     logoUrl: "seal.jpg",
     color: "#C41D21",
   },
   {
-    type: "Happiness Sponser",
+    type: "Happiness Partner",
     name: "triangle",
     logoUrl: "triangle.jpg",
     color: "#D28B7C",
   },
   {
-    type: "Media Sponser",
+    type: "Media Partner",
     name: "42",
     logoUrl: "42.jpg",
     color: "#B74C31",
@@ -61,11 +62,12 @@ const otherPartners = [
 ];
 
 export const Partners = () => {
+  const { setColor } = useColorContext();
   const platinumPartners = partners.filter(
-    (p) => p.type === "Platinum Sponser",
+    (p) => p.type === "Platinum Partner",
   );
   const otherMainPartners = partners.filter(
-    (p) => p.type !== "Platinum Sponser",
+    (p) => p.type !== "Platinum Partner",
   );
   console.log(otherMainPartners);
   const [activePartner, setActivePartner] = useState<{
@@ -134,7 +136,7 @@ export const Partners = () => {
           className="text-4xl md:text-5xl font-bold pb-6  text-evening-sea-50"
           animate={{
             color:
-              activePartner?.type === "Platinum Sponser"
+              activePartner?.type === "Platinum Partner"
                 ? activePartner.color
                 : "#FFFFFF",
           }}
@@ -143,7 +145,7 @@ export const Partners = () => {
             ease: "easeInOut",
           }}
         >
-          Platinum Sponsors
+          Platinum Partners
         </motion.h2>
         <div className="grid grid-cols-2  gap-8 max-w-4xl mx-auto pb-6">
           {platinumPartners.map((partner, index) => (
@@ -151,6 +153,7 @@ export const Partners = () => {
               key={index}
               onMouseEnter={() => {
                 setActivePartner(partner);
+                setColor(partner.color);
                 setIsOpen(true);
               }}
               onMouseLeave={setPartnerTonull}
@@ -180,6 +183,7 @@ export const Partners = () => {
               key={index}
               onMouseEnter={() => {
                 setActivePartner(partner);
+                setColor(partner.color);
                 setIsOpen(true);
               }}
               onMouseLeave={setPartnerTonull}

@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 interface LegacyYearPageProps {
@@ -7,19 +6,13 @@ interface LegacyYearPageProps {
 }
 
 export default function LegacyYearPage({ year }: LegacyYearPageProps) {
-  const router = useRouter();
   const [timer, setTimer] = useState(5);
-
-  const goBack = () => {
-    router.push("/");
-  };
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTimer((prevTimer) => {
-        if (prevTimer <= 1) {
-          goBack();
-          return 0;
+        if (prevTimer == 1) {
+          window.location.href = "/";
         }
         return prevTimer - 1;
       });
@@ -28,9 +21,13 @@ export default function LegacyYearPage({ year }: LegacyYearPageProps) {
     return () => clearInterval(interval);
   }, []);
 
+  const handleGoBackClick = () => {
+    window.location.href = "/";
+  };
+
   return (
     <a
-      onClick={goBack}
+      onClick={handleGoBackClick}
       className="h-screen w-screen flex flex-col items-center justify-center"
     >
       <h1 className="text-4xl font-bold">Shasthra {year}</h1>

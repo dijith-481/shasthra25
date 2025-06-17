@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useColorContext } from "@/context/color";
 
 const festLogos = [
   {
@@ -58,6 +59,7 @@ const rightLogos = festLogos.slice(4, 8);
 const INTERVAL = 4000;
 
 export const PastFests = () => {
+  const { setColor } = useColorContext();
   const [activeFest, setActiveFest] = useState<{
     year: number;
     name: string;
@@ -91,6 +93,7 @@ export const PastFests = () => {
       setActiveFest(null);
     } else {
       setActiveFest(festLogos[currentIndex]);
+      // setColor(festLogos[currentIndex].color);
     }
     setIsOpen(true);
   }, [currentIndex]);
@@ -141,6 +144,7 @@ export const PastFests = () => {
       clearInterval(intervalIdRef.current);
     }
     setActiveFest(fest);
+    setColor(fest.color);
     setIsOpen(true);
   };
 
