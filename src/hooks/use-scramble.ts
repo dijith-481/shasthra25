@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 
 const CHARS = "!@#$%^&*():{};|,.<>/?";
 
@@ -6,7 +6,11 @@ export const useScramble = (text: string) => {
   const [displayText, setDisplayText] = useState(text);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const scramble = () => {
+  const scramble = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
     let pos = 0;
     intervalRef.current = setInterval(() => {
       const scrambled = text
@@ -26,14 +30,15 @@ export const useScramble = (text: string) => {
         setDisplayText(text);
       }
     }, 15);
-  };
+  }, [text]);
 
-  const stopScramble = () => {
+  const stopScramble = useCallback(() => {
     if (intervalRef.current !== null) {
       clearInterval(intervalRef.current);
+      intervalRef.current = null;
       setDisplayText(text);
     }
-  };
+  }, [text]);
 
   return { displayText, scramble, stopScramble };
 };
