@@ -11,10 +11,12 @@ const images = [
   { url: "/gallery5.png", color: "#B28880" },
 ];
 const INTERVAL = 1000;
+const ANIMATION_DURATION = 1;
 
 export function ImageCarousel() {
   const { setColor } = useColorContext();
   const [currentIndex, setCurrentIndex] = useState(1);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const intervalIdRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -32,18 +34,24 @@ export function ImageCarousel() {
   }, [advanceImage]);
 
   const nextImg = useCallback(() => {
+    if (isAnimating) return;
     const nextIndex = (currentIndex + 1) % images.length;
     setCurrentIndex(nextIndex);
     setColor(images[nextIndex].color);
     startAutoplay();
-  }, [currentIndex, setColor, startAutoplay]);
+  }, [currentIndex, setColor, startAutoplay, isAnimating]);
 
   const prevImg = useCallback(() => {
+    if (isAnimating) return;
     const prevIndex = (currentIndex - 1 + images.length) % images.length;
     setCurrentIndex(prevIndex);
     setColor(images[prevIndex].color);
     startAutoplay();
-  }, [currentIndex, setColor, startAutoplay]);
+  }, [currentIndex, setColor, startAutoplay, isAnimating]);
+
+  useEffect(() => {
+    setIsAnimating(true);
+  }, [currentIndex]);
 
   useEffect(() => {
     startAutoplay();
@@ -66,7 +74,7 @@ export function ImageCarousel() {
           initial={{ filter: "blur(80px)", opacity: 0 }}
           animate={{ filter: "blur(20px)", opacity: 1 }}
           exit={{ filter: "blur(80px)", opacity: 0 }}
-          transition={{ duration: 1, ease: "linear" }}
+          transition={{ duration: ANIMATION_DURATION, ease: "linear" }}
           className="absolute inset-0 z-0 md:h-[100dvh] w-full "
         >
           <Image
@@ -118,8 +126,9 @@ export function ImageCarousel() {
                   left: newLeft,
                   width: newWidth,
                 }}
+                onAnimationComplete={() => setIsAnimating(false)}
                 transition={{
-                  duration: 1,
+                  duration: ANIMATION_DURATION,
                   ease: "linear",
                 }}
               >
