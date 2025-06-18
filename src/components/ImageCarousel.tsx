@@ -120,7 +120,7 @@ export function ImageCarousel() {
             return (
               <motion.div
                 key={index}
-                onClick={isLeft ? () => prevImg(true) : () => nextImg()}
+                onClick={isLeft ? () => prevImg() : () => nextImg()}
                 className={`h-full    absolute top-0 left-0  overflow-hidden rounded-md flex flex-col justify-center items-center `}
                 animate={{
                   left: newLeft,
