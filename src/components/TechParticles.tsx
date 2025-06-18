@@ -1,22 +1,29 @@
 import { useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export const TechParticles = () => {
+  const isMobile = useIsMobile();
+
   return (
     <Canvas className="" camera={{ position: [0, 0, 2] }}>
-      <Stars />
+      <Stars isMobile={isMobile} />
     </Canvas>
   );
 };
 
-function Stars(props: any) {
+function Stars(props: { isMobile: boolean }) {
+  const { isMobile } = props;
   const ref = useRef<any>(null);
+
   const [sphere] = useMemo(() => {
-    const count = 5000;
+    const count = isMobile ? 2000 : 5000;
+    const radiusFactor = isMobile ? 1.2 : 1.5;
+
     const positions = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      const r = 1.5 + Math.random() * 1.5;
+      const r = radiusFactor + Math.random() * 1.5;
       const theta = Math.random() * 2 * Math.PI;
       const phi = Math.acos(2 * Math.random() - 1);
       positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
@@ -24,26 +31,22 @@ function Stars(props: any) {
       positions[i * 3 + 2] = r * Math.cos(phi);
     }
     return [positions];
-  }, []);
+  }, [isMobile]);
 
   useFrame((_state, delta) => {
-    ref.current.rotation.x -= delta / 20;
-    ref.current.rotation.y -= delta / 25;
+    if (ref.current) {
+      ref.current.rotation.x -= delta / 20;
+      ref.current.rotation.y -= delta / 25;
+    }
   });
 
   return (
     <group rotation={[0, 0, Math.PI / 4]}>
-      <Points
-        ref={ref}
-        positions={sphere}
-        stride={3}
-        frustumCulled={false}
-        {...props}
-      >
+      <Points ref={ref} positions={sphere} stride={3} frustumCulled={false}>
         <PointMaterial
           transparent
           color="#20a985"
-          size={0.005}
+          size={isMobile ? 0.009 : 0.007}
           sizeAttenuation={true}
           depthWrite={false}
         />
