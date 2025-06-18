@@ -1,4 +1,14 @@
 export const About = () => {
+  const content = `
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore
+          laborum neque dolores reprehenderit, reiciendis saepe error minus, ad
+          impedit odio eligendi, deleniti earum ducimus minima. Ut sint nulla
+          quaerat error. Lorem ipsum dolor sit amet consectetur, adipisicing
+          elit. Tempore laborum neque dolores reprehenderit, reiciendis saepe
+          error minus, ad impedit odio eligendi, deleniti earum ducimus minima.
+          Ut sint nulla quaerat error. elit. Tempore laborum neque dolores
+          reprehenderit, reiciendis saepe error minus, ad impedit odio eligendi,
+          deleniti earum ducimus minima. Ut sint nulla quaerat error.`;
   return (
     <section
       id="about"
@@ -12,15 +22,7 @@ overflow-x-clip
         <h2 className="text-6xl font-bold py-8 tracking-tighter">About</h2>
 
         <p className="md:text-xl text-sm pb-8 text-center text-evening-sea-100">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore
-          laborum neque dolores reprehenderit, reiciendis saepe error minus, ad
-          impedit odio eligendi, deleniti earum ducimus minima. Ut sint nulla
-          quaerat error. Lorem ipsum dolor sit amet consectetur, adipisicing
-          elit. Tempore laborum neque dolores reprehenderit, reiciendis saepe
-          error minus, ad impedit odio eligendi, deleniti earum ducimus minima.
-          Ut sint nulla quaerat error. elit. Tempore laborum neque dolores
-          reprehenderit, reiciendis saepe error minus, ad impedit odio eligendi,
-          deleniti earum ducimus minima. Ut sint nulla quaerat error.
+          {content}
         </p>
       </div>
     </section>

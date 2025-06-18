@@ -9,6 +9,7 @@ import { CalendarIcon, FeeIcon, VenueIcon } from "@/components/Ui/Icons";
 import { mixColors, getContrastColor } from "@/utils/colorUtils";
 import { ItemDetailsType } from "@/utils/types";
 import { useColorContext } from "@/context/color";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
 const pages = ["about", "rules", "format", "contact"];
 
@@ -36,19 +37,19 @@ export default function ItemPage({
   const [isNavDropdownOpen, setIsNavDropdownOpen] = useState(false);
   const navDropdownRef = useRef<HTMLButtonElement>(null);
   const toggleNavDropdown = () => setIsNavDropdownOpen((prev) => !prev);
+  const { width } = useWindowSize();
 
   useEffect(() => {
     if (containerRef.current) {
       setPageWidth(containerRef.current.offsetWidth + 64);
 
-      console.log(pageWidth);
       const newX = -page * pageWidth;
       controls.start({
         x: newX,
         transition: { type: "spring", stiffness: 400, damping: 40 },
       });
     }
-  }, [page, controls, pageWidth]);
+  }, [page, controls, pageWidth, width]);
 
   const handleDragEnd = (
     _e: MouseEvent | TouchEvent | PointerEvent,

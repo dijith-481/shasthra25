@@ -1,16 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useColorContext } from "@/context/color";
+import Image from "next/image";
 
 const images = [
-  "gallery1.jpg",
-  "gallery2.jpg",
-  "gallery3.jpg",
-  "gallery4.jpg",
-  "gallery5.png",
+  { url: "/gallery1.jpg", color: "#87B0C0" },
+  { url: "/gallery2.jpg", color: "#261D55" },
+  { url: "/gallery3.jpg", color: "#95999D" },
+  { url: "/gallery4.jpg", color: "#B3C7C9" },
+  { url: "/gallery5.png", color: "#B28880" },
 ];
 const INTERVAL = 1000;
 
 export function ImageCarousel() {
+  const { setColor } = useColorContext();
   const [currentIndex, setCurrentIndex] = useState(1);
 
   const intervalIdRef = useRef<NodeJS.Timeout | null>(null);
@@ -25,14 +28,28 @@ export function ImageCarousel() {
   };
 
   const nextImg = (isAutoplay = false) => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
+    let color;
+    setCurrentIndex((prev) => {
+      const next = (prev + 1) % images.length;
+      color = images[next].color;
+
+      return next;
+    });
     if (!isAutoplay) {
+      if (color) setColor(color);
       startAutoplay();
     }
   };
 
   const prevImg = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+    let color;
+    setCurrentIndex((prev) => {
+      const next = (prev - 1 + images.length) % images.length;
+      color = images[next].color;
+
+      return next;
+    });
+    if (color) setColor(color);
     startAutoplay();
   };
 
@@ -53,15 +70,17 @@ export function ImageCarousel() {
     >
       <AnimatePresence initial={false} mode="sync">
         <motion.div
-          key={images[currentIndex]}
+          key={images[currentIndex].url}
           initial={{ filter: "blur(80px)", opacity: 0 }}
           animate={{ filter: "blur(20px)", opacity: 1 }}
           exit={{ filter: "blur(80px)", opacity: 0 }}
           transition={{ duration: 1, ease: "linear" }}
           className="absolute inset-0 z-0 md:h-[100dvh] w-full "
         >
-          <img
-            src={images[currentIndex]}
+          <Image
+            src={images[currentIndex].url}
+            width={1920}
+            height={1080}
             alt="Blurred background"
             className="w-full h-full  object-cover  opacity-50  "
           />
@@ -101,7 +120,7 @@ export function ImageCarousel() {
             return (
               <motion.div
                 key={index}
-                onClick={isLeft ? () => prevImg() : () => nextImg()}
+                onClick={isLeft ? () => prevImg(true) : () => nextImg()}
                 className={`h-full    absolute top-0 left-0  overflow-hidden rounded-md flex flex-col justify-center items-center `}
                 animate={{
                   left: newLeft,
@@ -113,8 +132,10 @@ export function ImageCarousel() {
                 }}
               >
                 <div className=" h-full aspect-video">
-                  <img
-                    src={image}
+                  <Image
+                    src={image.url}
+                    width={1920}
+                    height={1080}
                     className="object-cover h-full w-full"
                     alt=""
                   />

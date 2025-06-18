@@ -6,3 +6,11 @@ export const formatTime = (dateString: string) => {
     hour12: true,
   });
 };
+
+export const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleTimeString([], {
+    month: "short",
+    day: "numeric",
+  });
+};

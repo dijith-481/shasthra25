@@ -37,7 +37,7 @@ export default function ItemCard({
         setColor(item.color);
       }}
       onMouseLeave={() => setActive(null)}
-      className="relative group block  outline-none w-68 p-2 h-86 rounded-3xl translate-z-0  backface-hidden backdrop-blur-3xl bg-white/75 will-change-transform hover:bg-white/30 duration-500 transition-all   "
+      className="relative group block  outline-none w-68 p-2 h-86 rounded-3xl translate-z-0  backface-hidden backdrop-blur-3xl bg-white/75 will-change-transform hover:bg-white/50 duration-500 transition-all   "
       tabIndex={0}
     >
       <div className="absolute top-4 right-4   leading-none font-black text-sm text-black">
@@ -50,7 +50,7 @@ export default function ItemCard({
           </div>
         )}
         <div
-          className="absolute bottom-0 left-0 z-1 w-128 blur-2xl translate-x-[-25%] h-5/6 translate-y-[30%] saturate-70 group-hover:saturate-100 transition-all duration-500 ease-linear "
+          className="absolute bottom-0 left-0 z-1 w-128 blur-2xl translate-x-[-25%] h-5/6 translate-y-[40%] saturate-70 group-hover:saturate-100 transition-all duration-500 ease-linear "
           style={{
             backgroundColor: item.color,
           }}
@@ -69,16 +69,16 @@ export default function ItemCard({
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <div
-            className="absolute inset-0 saturate-70 group-hover:saturate-100 transition-all duration-500 ease-linear"
+            className="absolute inset-0 saturate-80 group-hover:saturate-100 transition-all duration-500 ease-linear"
             style={{
               backgroundColor: item.color,
-              mixBlendMode: "luminosity",
+              mixBlendMode: "multiply",
               opacity: 0.5,
               pointerEvents: "none",
             }}
           ></div>
         </div>
-        <div className="absolute bottom-0 left-0 z-3 h-64 w-96 translate-y-[50%] translate-x-[-15%] blur-2xl bg-evening-sea-950/37 group-hover:bg-evening-sea-950/80 transition-all duration-500 ease-linear "></div>
+        <div className="absolute bottom-0 left-0 z-3 h-64 w-96 translate-y-[50%] translate-x-[-15%] blur-2xl bg-black/20 group-hover:bg-black/40 transition-all duration-500 ease-linear "></div>
 
         <div className="absolute bottom-0 left-0 z-3 px-3 gap-0.5 flex items-start justify-center w-full flex-col">
           <h3 className="text-2xl font-bold text-white">{item.name}</h3>
@@ -93,7 +93,7 @@ export default function ItemCard({
             {item.tags?.map((tag, index) => (
               <div
                 key={index}
-                className="relative flex h-4 min-w-8 items-center justify-center rounded-full bg-evening-sea-50/20 px-1 py-0.5 text-[0.6rem] text-white backdrop-blur-sm"
+                className="relative flex h-4 min-w-8 items-center justify-center rounded-full bg-white/20 px-1 py-0.5 text-[0.6rem] text-white backdrop-blur-sm"
               >
                 <span>{tag}</span>
               </div>

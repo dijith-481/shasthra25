@@ -3,16 +3,17 @@ import { AnimatePresence, motion } from "framer-motion";
 import { isMobileDevice } from "@/utils/isMobile";
 import Link from "next/link";
 import { mixColors } from "@/utils/colorUtils";
-import { formatTime } from "@/utils/formatTime";
 
 interface ScheduleItemProps {
   item: ItemType;
+  time: string;
   isActive: boolean;
   setActive: React.Dispatch<React.SetStateAction<string | null>>;
 }
 export const ScheduleItem = ({
   item,
   isActive,
+  time,
   setActive,
 }: ScheduleItemProps) => {
   return (
@@ -57,7 +58,7 @@ export const ScheduleItem = ({
                 className="text-lg font-semibold text-black"
                 style={{ color: mixColors(item.color, "#000000", 0.7, 1) }}
               >
-                {formatTime(item.time)}
+                {time}
               </p>
               {item.prize && (
                 <p className="text-sm text-yellow-800">Prize: {item.prize}</p>

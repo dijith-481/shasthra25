@@ -3,30 +3,31 @@ import { Marquee } from "./Marquee";
 import { AnimatePresence, motion } from "framer-motion";
 import { useColorContext } from "@/context/color";
 import { mixColors } from "@/utils/colorUtils";
+import Image from "next/image";
 
 const partners = [
   {
     type: "Platinum Partner",
     name: "something",
-    logoUrl: "something.jpg",
+    logoUrl: "/something.jpg",
     color: "#91C9D7",
   },
   {
     type: "Platinum Partner",
     name: "seal",
-    logoUrl: "seal.jpg",
+    logoUrl: "/seal.jpg",
     color: "#C41D21",
   },
   {
     type: "Happiness Partner",
     name: "triangle",
-    logoUrl: "triangle.jpg",
+    logoUrl: "/triangle.jpg",
     color: "#D28B7C",
   },
   {
     type: "Media Partner",
     name: "42",
-    logoUrl: "42.jpg",
+    logoUrl: "/42.jpg",
     color: "#B74C31",
   },
 ];
@@ -70,7 +71,6 @@ export const Partners = () => {
   const otherMainPartners = partners.filter(
     (p) => p.type !== "Platinum Partner",
   );
-  console.log(otherMainPartners);
   const [activePartner, setActivePartner] = useState<{
     type: string;
     name: string;
@@ -117,16 +117,18 @@ export const Partners = () => {
         {activePartner && (
           <motion.div
             key={activePartner.name}
-            initial={{ opacity: 0, scale: 1.0, filter: "blur(20px)" }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(40px)" }}
-            exit={{ opacity: 0, scale: 1.0, filter: "blur(20px)" }}
+            initial={{ opacity: 0, scale: 1.0, filter: "blur(15px)" }}
+            animate={{ opacity: 0.5, scale: 1, filter: "blur(80px)" }}
+            exit={{ opacity: 0, scale: 1.0, filter: "blur(15px)" }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
             className="absolute inset-0 z-0 md:h-[120dvh] w-full "
           >
-            <img
+            <Image
               src={activePartner.logoUrl}
+              width={1920}
+              height={1080}
               alt="Blurred background"
-              className="w-full h-full  object-cover opacity-50    saturate-80 "
+              className="w-full h-full  object-cover saturate-100 "
             />
           </motion.div>
         )}

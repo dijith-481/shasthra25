@@ -4,7 +4,9 @@ import {
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa6";
+import { useColorContext } from "@/context/color";
 export const Footer = () => {
+  const { color } = useColorContext();
   return (
     <section
       id="footer"
@@ -13,7 +15,12 @@ export const Footer = () => {
       <div className="absolute top-0 left-0  z-1 w-[200vw] translate-x-[-25%]  h-full   blur-2xl  md:blur-3xl bg-black  "></div>
       <div className="relative flex items-center flex-col z-4 justify-center  gap-y-4 mb-8  ">
         <div className=" relative flex items-center  h-full mt-20 justify-center gap-0   ">
-          <div className="absolute inset-8 -z-2  bg-evening-sea-930"></div>
+          <div
+            className="absolute inset-8 -z-2  "
+            style={{
+              backgroundColor: color,
+            }}
+          ></div>
           {[
             { href: "legacy/facebook", icon: FaFacebookF, label: "Facebook" },
             { href: "legacy/twitter", icon: FaTwitter, label: "Twitter" },
@@ -26,7 +33,10 @@ export const Footer = () => {
               aria-label={social.label}
               target="_blank"
               rel="noopener noreferrer"
-              className="md:w-24 md:h-24 w-12 h-12 flex items-center justify-center  hover:bg-evening-sea-920 hover:scale-105 rounded-full bg-evening-sea-930  transition-all duration-300"
+              className="md:w-24 md:h-24 w-12 h-12 flex items-center justify-center mx-[-0.1rem]   hover:scale-105 rounded-full   transition-all duration-300"
+              style={{
+                backgroundColor: color,
+              }}
             >
               <social.icon size={20} />
             </a>

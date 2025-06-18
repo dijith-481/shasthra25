@@ -19,7 +19,7 @@ export const ContactCard = ({ contacts, color }: ContactCardProps) => {
       {contacts.map((contact, index) => (
         <div
           key={index}
-          className="  rounded-3xl w-full p-6 "
+          className="  rounded-3xl w-full p-6 max-w-96 "
           style={{
             backgroundColor: mixColors(color, "#ffffff", 0.5, 0.7),
           }}

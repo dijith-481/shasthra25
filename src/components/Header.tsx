@@ -68,7 +68,7 @@ export function Header() {
   return (
     <motion.section
       id="header"
-      className={`top-0 left-0 z-50 w-full  fixed   md:h-18 h-10 transition-all ease-in-out duration-700 ${showHeader ? "opacity-100" : "opacity-0"} `}
+      className={`top-0 left-0 z-50 w-full  fixed   md:h-18 h-10 transition-all ease-in-out hover:opacity-100 duration-700 ${showHeader ? "opacity-100" : "opacity-0"} `}
       onMouseEnter={scramble}
       onMouseLeave={stopScramble}
     >
@@ -91,7 +91,7 @@ export function Header() {
           <div
             className="hidden md:flex items-center z-41 gap-x-8"
             style={{
-              color: color + "c0",
+              color: color,
             }}
           >
             {navItems.map((item) => (
@@ -107,11 +107,11 @@ export function Header() {
           <div
             className="hidden md:flex text-white border hover:font-black w-32  items-center justify-center  rounded-full text-xs md:text-sm     z-10      backdrop-blur-2xl   py-1       "
             style={{
-              color: color + "c0",
-              borderColor: color + "c0",
+              color: color,
+              borderColor: color,
             }}
           >
-            <Link href="/signup" className="">
+            <Link href="/legacy/signup" className="">
               Sign Up
             </Link>
           </div>
@@ -160,18 +160,17 @@ export function Header() {
             exit="hidden"
             onClick={() => {
               setIsOpen(false);
-              console.log("clicked");
             }}
             variants={menuVariants}
             className="fixed inset-0 z-2 flex flex-col items-center justify-center backdrop-blur-2xl   md:hidden"
             style={{
-              backgroundColor: mixColors(color, "#ffffff", 0.5, 0.05),
+              backgroundColor: mixColors(color, "#ffffff", 0.1, 0.5),
             }}
           >
             <div
               className="flex flex-col items-center gap-y-8"
               style={{
-                color: mixColors(color, "#000000", 0.5, 1),
+                color: mixColors(color, "#ffffff", 0.9, 1),
               }}
             >
               {navItems.map((item) => (
@@ -187,15 +186,16 @@ export function Header() {
               ))}
               <motion.div
                 variants={listItemVariants}
-                className="mt-8"
+                className="mt-8 px-6 py-3 rounded-full backdrop-blur-xl"
                 style={{
-                  color: mixColors(color, "#000000", 0.5, 1),
+                  backgroundColor: mixColors(color, "#ffffff", 0.3, 0.5),
+                  color: mixColors(color, "#ffffff", 0.8, 1),
                 }}
               >
                 <Link
                   href="/signup"
                   onClick={() => setIsOpen(false)}
-                  className="text-lg font-semibold rounded-full bg-white/10 px-6 py-3  hover:bg-white/20 transition-all"
+                  className="text-lg font-semibold rounded-full     transition-all"
                 >
                   Sign Up
                 </Link>

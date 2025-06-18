@@ -7,6 +7,7 @@ import { mixColors } from "@/utils/colorUtils";
 import { isMobileDevice } from "@/utils/isMobile";
 import { useColorContext } from "@/context/color";
 import { ItemType } from "@/components/ItemCard";
+import { formatDate, formatTime } from "@/utils/formatTime";
 
 interface ScheduleListProps {
   items: ItemType[];
@@ -209,6 +210,11 @@ export const ScheduleList = ({
               {visibleItems.length > 0 ? (
                 visibleItems.map((item) => (
                   <ScheduleItem
+                    time={
+                      activeDayFilter !== "All Days"
+                        ? formatTime(item.time)
+                        : formatDate(item.time)
+                    }
                     key={item.id}
                     item={item}
                     isActive={item.id === active}
