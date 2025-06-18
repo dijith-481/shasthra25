@@ -35,6 +35,14 @@ export function ItemsList({ items, loading, filters, name }: ItemListProps) {
   const [active, setActive] = useState<string | null>(null);
   const activeItem = active ? items.find((e) => e.id === active) : null;
 
+  const filterList = useMemo(() => {
+    const obj: Record<string, string> = {};
+    filters.forEach((item) => {
+      obj[item] = item;
+    });
+    return obj;
+  }, [filters]);
+
   const handleScroll = () => {
     if (!itemRef.current) return;
     setScrollPosition(itemRef.current.scrollTop);
@@ -229,13 +237,7 @@ export function ItemsList({ items, loading, filters, name }: ItemListProps) {
               <span className="text-xs">▼</span>
             </button>
             <DropDown
-              options={{
-                All: "All",
-                General: "General",
-                Talk: "Talk",
-                Conference: "Conference",
-                Workshop: "Workshop",
-              }}
+              options={filterList}
               color={color}
               selectedOption={activeSort}
               onSelect={(option: string) => {
