@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Tektur } from "next/font/google";
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
-  authors: [{ name: "dijith" }],
+  authors: [{ name: "dijith-481" }],
 };
 
 export default function RootLayout({
@@ -71,6 +72,7 @@ export default function RootLayout({
           <Header />
           {children}
         </ColorProvider>
+        <Analytics />
       </body>
     </html>
   );
