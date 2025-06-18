@@ -29,11 +29,10 @@ An expressive overengineered tech-fest webpage designed for web-team selection t
 - detailed content for events, competitions
   - `/events/eventId.json` and `/competitions/competitionId.json`
   - currently hardcoded `/events/1.json`
+-  images generated via `Whisk`
 
-//add a note about the content and images are for placeholder purposes only
-
-> [!NOTE] The content and images are for placeholder purposes only
-> Images generated via `Whisk`
+> [!NOTE]
+>The content and images are for placeholder purposes only
 
 ## License
 
