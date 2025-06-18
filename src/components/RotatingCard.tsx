@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useColorContext } from "@/context/color";
 import ItemCard, { ItemType } from "@/components/ItemCard";
-import { mixColors } from "@/utils/colorUtils";
 export const desktopCardPositions = [
   {
     top: "5%",
@@ -91,7 +90,7 @@ export const RotatingCard = ({
   return (
     <motion.div
       className="absolute inline-block"
-      onMouseEnter={() => setColor(mixColors(item.color, "#ffffff", 0.7, 1))}
+      onMouseEnter={() => setColor(item.color)}
       style={{ ...position, transformStyle: "preserve-3d" }}
     >
       <AnimatePresence initial={false} mode="wait">

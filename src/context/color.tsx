@@ -20,7 +20,7 @@ export const useColorContext = (): ColorContextType => {
   return context;
 };
 
-export const ColorProvider = ({ children }: any) => {
+export const ColorProvider = ({ children }: { children: React.ReactNode }) => {
   const [color, setColor] = useState("#ffffff");
 
   const contextValue = {

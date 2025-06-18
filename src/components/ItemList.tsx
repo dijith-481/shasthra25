@@ -5,6 +5,7 @@ import DropDown from "@/components/Ui/Dropdown";
 import { mixColors } from "@/utils/colorUtils";
 import { isMobileDevice } from "@/utils/isMobile";
 import { useColorContext } from "@/context/color";
+import Image from "next/image";
 
 interface ItemListProps {
   items: ItemType[];
@@ -59,16 +60,16 @@ export function ItemsList({ items, loading, filters, name }: ItemListProps) {
     });
 
     const sorted = [...filtered].sort((a, b) => {
-      let valA: any, valB: any;
+      let valA: number | string;
+      let valB: number | string;
 
       switch (sortKey) {
         case "prize":
-          if (a.prize !== undefined) {
-            valA = parseInt(a.prize, 10) || 0;
-          }
-          if (b.prize !== undefined) {
-            valB = parseInt(b.prize, 10) || 0;
-          }
+          if (a.prize !== undefined) valA = parseInt(a.prize, 10) || 0;
+          else valA = 0;
+
+          if (b.prize !== undefined) valB = parseInt(b.prize, 10) || 0;
+          else valB = 0;
           break;
         case "time":
           valA = new Date(a.time).getTime() || 0;
@@ -133,8 +134,10 @@ export function ItemsList({ items, loading, filters, name }: ItemListProps) {
               transition={{ duration: 0.5, ease: "linear" }}
               className="fixed top-0 left-0 h-screen  w-screen "
             >
-              <img
+              <Image
                 src={activeItem.image}
+                width={1920}
+                height={1080}
                 alt="Blurred background"
                 className="w-screen h-screen  object-cover  opacity-50 saturate-50  "
               />

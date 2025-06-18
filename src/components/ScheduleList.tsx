@@ -86,7 +86,8 @@ export const ScheduleList = ({
     });
 
     const sorted = [...typeFiltered].sort((a, b) => {
-      let valA: any, valB: any;
+      let valA: number | string;
+      let valB: number | string;
       switch (sortKey) {
         case "time":
           valA = new Date(a.time).getTime() || 0;
@@ -206,31 +207,28 @@ export const ScheduleList = ({
                   : "96px",
             }}
           >
-            <AnimatePresence>
-              {visibleItems.length > 0 ? (
-                visibleItems.map((item) => (
-                  <ScheduleItem
-                    time={
-                      activeDayFilter !== "All Days"
-                        ? formatTime(item.time)
-                        : formatDate(item.time)
-                    }
-                    key={item.id}
-                    item={item}
-                    isActive={item.id === active}
-                    setActive={setActive}
-                  />
-                ))
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="text-evening-sea-300 mt-24"
-                >
-                  No items match the current filters.
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {visibleItems.length > 0 ? (
+              visibleItems.map((item) => (
+                <ScheduleItem
+                  time={
+                    activeDayFilter !== "All Days"
+                      ? formatTime(item.time)
+                      : formatDate(item.time)
+                  }
+                  key={item.id}
+                  item={item}
+                  setActive={setActive}
+                />
+              ))
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-evening-sea-300 mt-24"
+              >
+                No items match the current filters.
+              </motion.div>
+            )}
           </div>
         )}
         <div className="absolute bottom-4 h-12 flex gap-2 flex-row justify-center items-center flex-wrap">

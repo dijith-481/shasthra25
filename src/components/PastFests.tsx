@@ -1,55 +1,55 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useColorContext } from "@/context/color";
-import { mixColors } from "@/utils/colorUtils";
+import Image from "next/image";
 
 const festLogos = [
   {
     year: 2024,
     name: "Shasthra '24",
-    imageUrl: "excel2024.png",
+    imageUrl: "/excel2024.png",
     color: "#674671",
   },
   {
     year: 2023,
     name: "Shasthra '23",
-    imageUrl: "excel2023.png",
+    imageUrl: "/excel2023.png",
     color: "#cd1167",
   },
   {
     year: 2022,
     name: "Shasthra '22",
-    imageUrl: "excel2022.png",
+    imageUrl: "/excel2022.png",
     color: "#25b5c9",
   },
   {
     year: 2021,
     name: "Shasthra '21",
-    imageUrl: "excel2021.png",
+    imageUrl: "/excel2021.png",
     color: "#ea56f1",
   },
   {
     year: 2020,
     name: "Shasthra '20",
-    imageUrl: "excel2020.png",
+    imageUrl: "/excel2020.png",
     color: "#2890ab",
   },
   {
     year: 2019,
     name: "Shasthra '19",
-    imageUrl: "excel2019.png",
+    imageUrl: "/excel2019.png",
     color: "#da4b1d",
   },
   {
     year: 2018,
     name: "Shasthra '18",
-    imageUrl: "excel2018.png",
+    imageUrl: "/excel2018.png",
     color: "#1bae89",
   },
   {
     year: 2017,
     name: "Shasthra '17",
-    imageUrl: "excel2017.png",
+    imageUrl: "/excel2017.png",
     color: "#913f46",
   },
 ];
@@ -73,28 +73,24 @@ export const PastFests = () => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const intervalIdRef = useRef<NodeJS.Timeout | null>(null);
 
-  const startAutoplay = () => {
+  const advanceFest = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % (festLogos.length + 1));
+  }, []);
+
+  const startAutoplay = useCallback(() => {
     if (intervalIdRef.current) {
       clearInterval(intervalIdRef.current);
     }
     intervalIdRef.current = setInterval(() => {
-      nextFest(true);
+      advanceFest();
     }, INTERVAL);
-  };
-
-  const nextFest = (isAutoplay = false) => {
-    setCurrentIndex((prev) => (prev + 1) % (festLogos.length + 1));
-    if (!isAutoplay) {
-      startAutoplay();
-    }
-  };
+  }, [advanceFest]);
 
   useEffect(() => {
     if (currentIndex === festLogos.length) {
       setActiveFest(null);
     } else {
       setActiveFest(festLogos[currentIndex]);
-      // setColor(festLogos[currentIndex].color);
     }
     setIsOpen(true);
   }, [currentIndex]);
@@ -125,7 +121,7 @@ export const PastFests = () => {
         clearInterval(intervalIdRef.current);
       }
     };
-  }, []);
+  }, [startAutoplay]);
 
   const setFestToNull = () => {
     setIsOpen(false);
@@ -144,8 +140,12 @@ export const PastFests = () => {
     if (intervalIdRef.current) {
       clearInterval(intervalIdRef.current);
     }
-    setActiveFest(fest);
-    setColor(mixColors(fest.color, "#ffffff", 0.7, 1));
+
+    const newIndex = festLogos.findIndex((f) => f.year === fest.year);
+    if (newIndex !== -1) {
+      setCurrentIndex(newIndex);
+    }
+    setColor(fest.color);
     setIsOpen(true);
   };
 
@@ -180,8 +180,10 @@ export const PastFests = () => {
             transition={{ duration: 0.5, ease: "easeInOut" }}
             className="absolute inset-0 z-0 md:h-[100dvh] w-full "
           >
-            <img
+            <Image
               src={activeFest.imageUrl}
+              width={1920}
+              height={1080}
               alt="Blurred background"
               className="w-full h-full  object-cover   saturate-80 "
             />
@@ -217,9 +219,11 @@ export const PastFests = () => {
                 onMouseLeave={handleMouseLeave}
                 className="cursor-pointer"
               >
-                <img
+                <Image
                   src={fest.imageUrl}
                   alt={fest.name}
+                  width={1920}
+                  height={1080}
                   style={{
                     borderColor: fest.color,
                   }}
@@ -285,9 +289,11 @@ export const PastFests = () => {
                 onMouseLeave={handleMouseLeave}
                 className="cursor-pointer"
               >
-                <img
+                <Image
                   src={fest.imageUrl}
                   alt={fest.name}
+                  width={1920}
+                  height={1080}
                   style={{
                     borderColor: fest.color,
                   }}

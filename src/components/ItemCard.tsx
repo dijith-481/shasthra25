@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useColorContext } from "@/context/color";
+import Image from "next/image";
 
 export interface ItemType {
   id: string;
@@ -62,9 +63,11 @@ export default function ItemCard({
             WebkitClipPath: "url(#myClipPath)",
           }}
         >
-          <img
+          <Image
             src={item.image}
             alt={item.name}
+            width={1200}
+            height={1200}
             className="w-full h-full object-cover saturate-40 group-hover:saturate-100 transition-all duration-500 ease-linear "
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />

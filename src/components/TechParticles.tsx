@@ -2,6 +2,7 @@ import { useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import type { Points as ThreePoints } from "three";
 
 export const TechParticles = () => {
   const isMobile = useIsMobile();
@@ -15,7 +16,7 @@ export const TechParticles = () => {
 
 function Stars(props: { isMobile: boolean }) {
   const { isMobile } = props;
-  const ref = useRef<any>(null);
+  const ref = useRef<ThreePoints>(null);
 
   const [sphere] = useMemo(() => {
     const count = isMobile ? 2000 : 5000;

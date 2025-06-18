@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Marquee } from "./Marquee";
 import { AnimatePresence, motion } from "framer-motion";
 import { useColorContext } from "@/context/color";
-import { mixColors } from "@/utils/colorUtils";
 import Image from "next/image";
 
 const partners = [
@@ -156,16 +155,18 @@ export const Partners = () => {
               key={index}
               onMouseEnter={() => {
                 setActivePartner(partner);
-                setColor(mixColors(partner.color, "#ffffff", 0.7, 1));
+                setColor(partner.color);
                 setIsOpen(true);
               }}
               onMouseLeave={setPartnerTonull}
               className="cursor-pointer    "
             >
               <div className="transition-all group duration-300 flex justify-center items-center flex-col overflow-hidden backdrop-blur-3xl  w-full h-full rounded-2xl    ">
-                <img
+                <Image
                   src={partner.logoUrl}
                   alt={partner.name}
+                  width={1920}
+                  height={1080}
                   className="w-32 aspect-video md:w-64  object-cover group-hover:scale-105 transition-all duration-300 "
                 />
                 <h3
@@ -207,9 +208,11 @@ export const Partners = () => {
               >
                 {partner.type}
               </motion.h2>
-              <img
+              <Image
                 src={partner.logoUrl}
                 alt={partner.name}
+                width={1920}
+                height={1080}
                 className="w-32 aspect-video md:w-48 rounded-2xl object-cover border-0 hover:border-2 border-white/10 hover:scale-105
                 transition-all duration-300 "
               />

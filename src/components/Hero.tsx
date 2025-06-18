@@ -11,6 +11,7 @@ import {
   mobileCardPositions,
   RotatingCard,
 } from "@/components/RotatingCard";
+import { mixColors } from "@/utils/colorUtils";
 
 export const Hero = () => {
   const isMobile = useIsMobile();
@@ -107,7 +108,7 @@ export const Hero = () => {
           initial="initial"
           animate="animate"
           className="text-[15vw] ease-in-out duration-500 transition-all md:text-[12vw] font-extrabold tracking-tighter flex overflow-hidden"
-          style={{ color: color }}
+          style={{ color: mixColors(color, "#FFFFFF", 0.7) }}
           aria-label={title}
         >
           {title.split("").map((char, index) => (

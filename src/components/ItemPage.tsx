@@ -10,6 +10,7 @@ import { mixColors, getContrastColor } from "@/utils/colorUtils";
 import { ItemDetailsType } from "@/utils/types";
 import { useColorContext } from "@/context/color";
 import { useWindowSize } from "@/hooks/useWindowSize";
+import Image from "next/image";
 
 const pages = ["about", "rules", "format", "contact"];
 
@@ -139,7 +140,9 @@ export default function ItemPage({
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="fixed top-0 left-0 h-screen w-screen pointer-events-none"
         >
-          <img
+          <Image
+            width={1920}
+            height={1080}
             src={itemBase.image}
             alt="Blurred background"
             className="w-screen h-screen object-cover z-0 blur-md opacity-70 "

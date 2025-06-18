@@ -9,7 +9,6 @@ import { useWindowSize } from "../hooks/useWindowSize";
 import { isMobileDevice } from "../utils/isMobile";
 import Link from "next/link";
 import { useColorContext } from "@/context/color";
-import { mixColors } from "@/utils/colorUtils";
 
 const COLOR_PALETTE = [
   "bg-cyan-500",
@@ -87,7 +86,7 @@ export const ShasthraHypeCard = () => {
 
         <div
           className="relative w-full flex justify-center items-center my-2"
-          onMouseEnter={() => setColor(mixColors("#00C8EC", "#8A3BCD", 0.5, 1))}
+          onMouseEnter={() => setColor("#1945b4")}
         >
           <h2 className="text-[15vw] font-black tracking-tighter bg-gradient-to-r  leading-none from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent select-none">
             SHASTHRA&apos;25

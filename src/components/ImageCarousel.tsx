@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useColorContext } from "@/context/color";
 import Image from "next/image";
@@ -18,40 +18,32 @@ export function ImageCarousel() {
 
   const intervalIdRef = useRef<NodeJS.Timeout | null>(null);
 
-  const startAutoplay = () => {
+  const advanceImage = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  }, []);
+
+  const startAutoplay = useCallback(() => {
     if (intervalIdRef.current) {
       clearInterval(intervalIdRef.current);
     }
     intervalIdRef.current = setInterval(() => {
-      nextImg(true);
+      advanceImage();
     }, 4 * INTERVAL);
-  };
+  }, [advanceImage]);
 
-  const nextImg = (isAutoplay = false) => {
-    let color;
-    setCurrentIndex((prev) => {
-      const next = (prev + 1) % images.length;
-      color = images[next].color;
-
-      return next;
-    });
-    if (!isAutoplay) {
-      if (color) setColor(color);
-      startAutoplay();
-    }
-  };
-
-  const prevImg = () => {
-    let color;
-    setCurrentIndex((prev) => {
-      const next = (prev - 1 + images.length) % images.length;
-      color = images[next].color;
-
-      return next;
-    });
-    if (color) setColor(color);
+  const nextImg = useCallback(() => {
+    const nextIndex = (currentIndex + 1) % images.length;
+    setCurrentIndex(nextIndex);
+    setColor(images[nextIndex].color);
     startAutoplay();
-  };
+  }, [currentIndex, setColor, startAutoplay]);
+
+  const prevImg = useCallback(() => {
+    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+    setCurrentIndex(prevIndex);
+    setColor(images[prevIndex].color);
+    startAutoplay();
+  }, [currentIndex, setColor, startAutoplay]);
 
   useEffect(() => {
     startAutoplay();
@@ -61,7 +53,7 @@ export function ImageCarousel() {
         clearInterval(intervalIdRef.current);
       }
     };
-  }, []);
+  }, [startAutoplay]);
 
   return (
     <section
@@ -120,7 +112,7 @@ export function ImageCarousel() {
             return (
               <motion.div
                 key={index}
-                onClick={isLeft ? () => prevImg() : () => nextImg()}
+                onClick={isLeft ? prevImg : nextImg}
                 className={`h-full    absolute top-0 left-0  overflow-hidden rounded-md flex flex-col justify-center items-center `}
                 animate={{
                   left: newLeft,

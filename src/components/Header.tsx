@@ -77,7 +77,7 @@ export function Header() {
       <header
         className={` absolute text-white top-0 h-full z-3  w-full transition-colors duration-300 ease-in-out`}
         style={{
-          color: color,
+          color: mixColors(color, "#FFFFFF", 0.6),
         }}
       >
         <nav className=" flex  items-center justify-between  px-4 py-1 md:py-4 ">
@@ -91,7 +91,7 @@ export function Header() {
           <div
             className="hidden md:flex items-center z-41 gap-x-8"
             style={{
-              color: color,
+              color: mixColors(color, "#FFFFFF", 0.6),
             }}
           >
             {navItems.map((item) => (
@@ -107,8 +107,8 @@ export function Header() {
           <div
             className="hidden md:flex text-white border hover:font-black w-32  items-center justify-center  rounded-full text-xs md:text-sm     z-10      backdrop-blur-2xl   py-1       "
             style={{
-              color: color,
-              borderColor: color,
+              color: mixColors(color, "#FFFFFF", 0.6),
+              borderColor: mixColors(color, "#FFFFFF", 0.6),
             }}
           >
             <Link href="/legacy/signup" className="">

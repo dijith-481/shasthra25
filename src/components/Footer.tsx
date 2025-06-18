@@ -5,6 +5,7 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa6";
 import { useColorContext } from "@/context/color";
+import { mixColors } from "@/utils/colorUtils";
 export const Footer = () => {
   const { color } = useColorContext();
   return (
@@ -18,7 +19,7 @@ export const Footer = () => {
           <div
             className="absolute inset-8 -z-2  "
             style={{
-              backgroundColor: color,
+              backgroundColor: mixColors(color, "#FFFFFF", 0.5, 1),
             }}
           ></div>
           {[
@@ -35,14 +36,24 @@ export const Footer = () => {
               rel="noopener noreferrer"
               className="md:w-24 md:h-24 w-12 h-12 flex items-center justify-center mx-[-0.1rem]   hover:scale-105 rounded-full   transition-all duration-300"
               style={{
-                backgroundColor: color,
+                backgroundColor: mixColors(color, "#FFFFFF", 0.5, 1),
               }}
             >
-              <social.icon size={20} />
+              <social.icon
+                size={20}
+                style={{
+                  color: "#000",
+                }}
+              />
             </a>
           ))}
         </div>
-        <p className=" text-sm text-gray-500">
+        <p
+          className=" text-sm "
+          style={{
+            color: mixColors(color, "#FFFFFF", 0.6, 0.7),
+          }}
+        >
           © {new Date().getFullYear()} SHASTHRA&apos;25. All Rights Reserved.
         </p>
       </div>
