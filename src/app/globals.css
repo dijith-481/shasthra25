@@ -1,15 +1,50 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme inline {
+  --color-evening-sea-50: oklch(97.8% 0.02 155.56);
+  --color-evening-sea-100: oklch(95.59% 0.04 156.96);
+  --color-evening-sea-200: oklch(92.42% 0.07 158.46);
+  --color-evening-sea-300: oklch(85.5% 0.1 160.03);
+  --color-evening-sea-400: oklch(76.54% 0.13 161.71);
+  --color-evening-sea-500: oklch(66.49% 0.15 163.78);
+  --color-evening-sea-600: oklch(54.4% 0.13 165.23);
+  --color-evening-sea-700: oklch(44.29% 0.11 166.08);
+  --color-evening-sea-800: oklch(34.82% 0.09 165.86);
+  --color-evening-sea-900: oklch(29.62% 0.07 164.71);
+  --color-evening-sea-920: oklch(21.98% 0.06 161.33);
+  --color-evening-sea-930: oklch(19.98% 0.05 160.33);
+  --color-evening-sea-950: oklch(15.98% 0.05 160.33);
+
+  --color-excel-2024: #674671;
+  --color-excel-2023: #cd1167;
+  --color-excel-2022: #25b5c9;
+  --color-excel-2021: #ea56f1;
+  --color-excel-2020: #2890ab;
+  --color-excel-2019: #da4b1d;
+  --color-excel-2018: #1bae89;
+  --color-excel-2017: #913f46;
+  --font-global: var(--font-tektur);
+  --font-inter: var(--font-inter);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@layer base {
+  @keyframes flow {
+    0% {
+      transform: translateY(0);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(-100vh);
+      opacity: 0;
+    }
+  }
+  .animate-flow {
+    animation: flow linear infinite;
+  }
+}
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +58,15 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+* {
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
