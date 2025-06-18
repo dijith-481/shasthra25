@@ -20,7 +20,7 @@ const tektur = Tektur({
 export const metadata: Metadata = {
   title: "Shasthra'25",
   description:
-    "An expressive overengineered  website designed for excel 2025 website team task with a cute little event card",
+    "An expressive overengineered  tech-fest webpage designed for  web-team selection tas part of excel'25 with a cute little event card",
   icons: {
     icon: "/favicon.ico",
   },
@@ -35,14 +35,13 @@ export default function RootLayout({
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    name: "Markweavia",
+    name: "Shasthra'25",
     description:
-      "A no-nonsense tool for creating professional, platform-independent HTML presentations from Markdown using familiar Vim motions.",
-    url: "https://markweavia.vercel.app",
-    applicationCategory: "Productivity",
+      "An expressive overengineered  website designed for excel 2025 website team task with a cute little event card",
+    url: "https://shasthra25.vercel.app/",
     creator: {
       "@type": "Person",
-      name: "dijith",
+      name: "dijith-481",
     },
   };
   return (

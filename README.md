@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shasthra'25
 
-## Getting Started
+An expressive overengineered tech-fest webpage designed for web-team selection task as part of excel'25 with a cute little event card
 
-First, run the development server:
+## Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Next.js
+- Tailwind CSS
+- Framer Motion
+- Three.js
+- TypeScript
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Pages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [x] Home
+- [x] Events
+- [x] Competitions
+- [x] Schedule
+- [x] placeholder for external links
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features
 
-## Learn More
+- responsive design with expressive colors
+- dynamic color changing
+- custom built event card
+- custom material design 3 like image carousel
+- dynamic content loading via json files for events, competitions,
+  - `/data/events.json` and `/data/competitions.json`
+- detailed content for events, competitions
+  - `/events/eventId.json` and `/competitions/competitionId.json`
+  - currently hardcoded `/events/1.json`
 
-To learn more about Next.js, take a look at the following resources:
+//add a note about the content and images are for placeholder purposes only
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> [!NOTE] The content and images are for placeholder purposes only
+> Images generated via `Whisk`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the **GNU General Public License v3.0**.
+See the [LICENSE](LICENSE) file for details.
