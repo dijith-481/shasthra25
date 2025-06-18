@@ -36,15 +36,27 @@ export default function CompetitionPage({ id }: { id: string }) {
         setCompetitionDetails(detailsData);
         setCompetitionBase(baseCompetitionInfo);
         setColor(baseCompetitionInfo.color);
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error("Failed to fetch competition data:", err);
-        setError(err.message);
+        if (err instanceof Error) {
+          setError(err.message);
+        } else if (typeof err === "string") {
+          setError(err);
+        } else if (
+          typeof err === "object" &&
+          err !== null &&
+          "message" in err
+        ) {
+          setError((err as { message: string }).message);
+        } else {
+          setError("An unknown error occurred.");
+        }
       } finally {
         setLoading(false);
       }
     };
     if (id) fetchCompetitonData();
-  }, [id]);
+  }, [id, setColor]);
 
   return (
     <ItemPage

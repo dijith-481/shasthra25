@@ -8,13 +8,7 @@ interface Props {
   colorClass: string;
 }
 
-export const BackdropCircle = ({
-  top,
-  left,
-  rotation,
-  size,
-  colorClass,
-}: Props) => {
+export const BackdropCircle = ({ top, left, rotation, size }: Props) => {
   const [isVisible, setIsVisible] = useState(true);
   const handleMouseEnter = () => setIsVisible(false);
 

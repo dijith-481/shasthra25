@@ -96,7 +96,7 @@ export function ItemsList({ items, loading, filters, name }: ItemListProps) {
     const clientHeight = itemRef.current.clientHeight;
     const scrollHeight = itemRef.current.scrollHeight - w / 2;
     const childHeight = scrollHeight / visibleItems.length;
-    let activeElement = Math.floor(
+    const activeElement = Math.floor(
       (scrollPosition + clientHeight / 2 - w / 3) / childHeight,
     );
 

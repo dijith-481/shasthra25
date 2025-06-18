@@ -35,15 +35,29 @@ export default function EventPage({ id }: { id: string }) {
         setEventDetails(detailsData);
         setEventBase(baseEventInfo);
         setColor(baseEventInfo.color);
-      } catch (err: any) {
-        console.error("Failed to fetch event data:", err);
-        setError(err.message);
+      } catch (err: unknown) {
+        {
+          console.error("Failed to fetch competition data:", err);
+          if (err instanceof Error) {
+            setError(err.message);
+          } else if (typeof err === "string") {
+            setError(err);
+          } else if (
+            typeof err === "object" &&
+            err !== null &&
+            "message" in err
+          ) {
+            setError((err as { message: string }).message);
+          } else {
+            setError("An unknown error occurred.");
+          }
+        }
       } finally {
         setLoading(false);
       }
     };
     if (id) fetchEventData();
-  }, [id]);
+  }, [id, setColor]);
 
   return (
     <ItemPage

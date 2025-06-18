@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
+import { Tektur } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components/Header";
+import { ColorProvider } from "@/context/color";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const tektur = Tektur({
+  variable: "--font-tektur",
   subsets: ["latin"],
 });
 
@@ -25,9 +28,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${tektur.className}  ${inter.variable} bg-background text-primary`}
       >
-        {children}
+        <svg
+          className="clip-svg"
+          width="00"
+          height="00"
+          viewBox="0 0 256 232"
+          style={{ position: "absolute", overflow: "hidden" }}
+        >
+          <defs>
+            <clipPath id="myClipPath">
+              <path d="M 0 16 L 0 216 Q 0 232 16 232 L 240 232 Q 256 232 256 216 L 256 48 Q 256 32 240 32 L 164 32 q -16 0 -16 -16 Q 148 0 132 0 L 16 0 Q 0 0 0 16" />
+            </clipPath>
+          </defs>
+        </svg>
+        <ColorProvider>
+          <Header />
+          {children}
+        </ColorProvider>
       </body>
     </html>
   );

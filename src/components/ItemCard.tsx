@@ -41,7 +41,7 @@ export default function ItemCard({
       tabIndex={0}
     >
       <div className="absolute top-4 right-4   leading-none font-black text-sm text-black">
-        SHASTHRA'25
+        SHASTHRA&apos;25
       </div>
       <div className="relative w-full h-full overflow-hidden rounded-2xl   ">
         {item.prize && (

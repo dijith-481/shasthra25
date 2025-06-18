@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useScramble } from "@/hooks/use-scramble";
 import { useColorContext } from "@/context/color";
-import { style } from "framer-motion/m";
 import { mixColors } from "@/utils/colorUtils";
 
 const navItems = [
@@ -39,7 +38,7 @@ export function Header() {
     if (isOpen) {
       setIsOpen(false);
     }
-  }, [isScrolled]);
+  }, [isScrolled, isOpen]);
 
   const showHeader = !isHomePage || isScrolled;
 
@@ -69,7 +68,7 @@ export function Header() {
     } else {
       scramble.stopScramble();
     }
-  }, [showHeader]);
+  }, [showHeader, scramble]);
 
   return (
     <motion.section

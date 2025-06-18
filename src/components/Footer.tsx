@@ -33,7 +33,7 @@ export const Footer = () => {
           ))}
         </div>
         <p className=" text-sm text-gray-500">
-          © {new Date().getFullYear()} SHASTHRA'25. All Rights Reserved.
+          © {new Date().getFullYear()} SHASTHRA&apos;25. All Rights Reserved.
         </p>
       </div>
     </section>

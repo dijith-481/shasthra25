@@ -13,9 +13,8 @@ export const GlitchText = () => {
       );
     }, 2000);
 
-    let glitchInterval: NodeJS.Timeout;
-    glitchInterval = setInterval(() => {
-      let text = currentPhrase;
+    const glitchInterval: NodeJS.Timeout = setInterval(() => {
+      const text = currentPhrase;
       let newText = "";
       for (let i = 0; i < text.length; i++) {
         newText += Math.random() > 0.85 ? "█" : text[i];

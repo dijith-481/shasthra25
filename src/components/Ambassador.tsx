@@ -14,10 +14,11 @@ overflow-x-clip
         </h2>
 
         <p className="md:text-xl text-sm  text-center text-evening-sea-100">
-          Become the face of Shasthra'25 in your college and invite your friends
-          to join us. Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Tempore laborum neque dolores reprehenderit, reiciendis saepe error
-          minus, ad deleniti earum ducimus minima. Ut sint nulla quaerat error.
+          Become the face of Shasthra&apos;25 in your college and invite your
+          friends to join us. Lorem ipsum dolor sit amet consectetur,
+          adipisicing elit. Tempore laborum neque dolores reprehenderit,
+          reiciendis saepe error minus, ad deleniti earum ducimus minima. Ut
+          sint nulla quaerat error.
         </p>
         <a
           href={`/legacy/Elevate`}

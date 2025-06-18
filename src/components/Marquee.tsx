@@ -52,7 +52,7 @@ export const Marquee: React.FC<MarqueeProps> = ({
 
   useAnimationFrame((_time, delta) => {
     if (!isAnimating || marqueeWidth === 0) return;
-    let moveBy = directionFactor.current * speed * (delta / 1000);
+    const moveBy = directionFactor.current * speed * (delta / 1000);
     baseX.set(baseX.get() + moveBy);
   });
 

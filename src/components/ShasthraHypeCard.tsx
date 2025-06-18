@@ -83,7 +83,7 @@ export const ShasthraHypeCard = () => {
 
         <div className="relative w-full flex justify-center items-center my-2">
           <h2 className="text-[15vw] font-black tracking-tighter bg-gradient-to-r  leading-none from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent select-none">
-            SHASTHRA'25
+            SHASTHRA&apos;25
           </h2>
           <div className="absolute inset-0 z-10">
             {circlesData.map((data) =>
