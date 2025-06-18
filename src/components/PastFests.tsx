@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useColorContext } from "@/context/color";
+import { mixColors } from "@/utils/colorUtils";
 
 const festLogos = [
   {
@@ -144,7 +145,7 @@ export const PastFests = () => {
       clearInterval(intervalIdRef.current);
     }
     setActiveFest(fest);
-    setColor(fest.color);
+    setColor(mixColors(fest.color, "#ffffff", 0.7, 1));
     setIsOpen(true);
   };
 

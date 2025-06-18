@@ -48,7 +48,7 @@ export default function ItemPage({
         transition: { type: "spring", stiffness: 400, damping: 40 },
       });
     }
-  }, [page, controls]);
+  }, [page, controls, pageWidth]);
 
   const handleDragEnd = (
     _e: MouseEvent | TouchEvent | PointerEvent,

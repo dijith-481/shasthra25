@@ -20,25 +20,20 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const scramble = useScramble("SHASTHRA'25");
+  const { displayText, scramble, stopScramble } = useScramble("SHASTHRA'25");
 
   const pathname = usePathname();
   const isHomePage = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const isScrolled = window.scrollY > 50;
+      setIsScrolled(isScrolled);
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    if (isOpen) {
-      setIsOpen(false);
-    }
-  }, [isScrolled, isOpen]);
 
   const showHeader = !isHomePage || isScrolled;
 
@@ -64,20 +59,20 @@ export function Header() {
 
   useEffect(() => {
     if (showHeader) {
-      scramble.scramble();
+      scramble();
     } else {
-      scramble.stopScramble();
+      stopScramble();
     }
-  }, [showHeader, scramble]);
+  }, [showHeader, scramble, stopScramble, color]);
 
   return (
     <motion.section
       id="header"
       className={`top-0 left-0 z-50 w-full  fixed   md:h-18 h-10 transition-all ease-in-out duration-700 ${showHeader ? "opacity-100" : "opacity-0"} `}
-      onMouseEnter={scramble.scramble}
-      onMouseLeave={scramble.stopScramble}
+      onMouseEnter={scramble}
+      onMouseLeave={stopScramble}
     >
-      <div className="absolute top-0 left-0  z-2 w-[200vw] translate-x-[-25%] translate-y-[-50%] h-24 md:h-47   blur-xl   bg-evening-sea-950/80  "></div>
+      <div className="absolute top-0 left-0  z-2 w-[200vw] translate-x-[-25%] translate-y-[-50%] h-24 md:h-47   blur-xl   bg-black/80  "></div>
       <div className="absolute top-0 left-0  z-1 w-[200vw] translate-x-[-25%] translate-y-[-33%] h-14 md:h-27 backdrop-blur-md  md:backdrop-blur-xl"></div>
       <header
         className={` absolute text-white top-0 h-full z-3  w-full transition-colors duration-300 ease-in-out`}
@@ -90,7 +85,7 @@ export function Header() {
             href="/"
             className={`md:text-2xl w-32 text-xl font-semibold md:font-black tracking-tighter  md:w-48 ${isOpen ? "opacity-0" : "opacity-100"}`}
           >
-            {scramble.displayText}
+            {displayText}
           </Link>
 
           <div
@@ -125,6 +120,9 @@ export function Header() {
             <motion.button
               onClick={() => setIsOpen(!isOpen)}
               className="relative h-5 w-6 text-white z-50"
+              style={{
+                color: color + "c0",
+              }}
               aria-label="Open menu"
             >
               <motion.div
@@ -160,7 +158,10 @@ export function Header() {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            onClick={() => setIsOpen(false)}
+            onClick={() => {
+              setIsOpen(false);
+              console.log("clicked");
+            }}
             variants={menuVariants}
             className="fixed inset-0 z-2 flex flex-col items-center justify-center backdrop-blur-2xl   md:hidden"
             style={{

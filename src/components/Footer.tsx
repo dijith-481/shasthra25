@@ -10,7 +10,7 @@ export const Footer = () => {
       id="footer"
       className="relative w-full    overflow-visible h-full     flex flex-col justify-center items-center overflow-x-clip"
     >
-      <div className="absolute top-0 left-0  z-1 w-[200vw] translate-x-[-25%]  h-full   blur-2xl  md:blur-3xl bg-evening-sea-950  "></div>
+      <div className="absolute top-0 left-0  z-1 w-[200vw] translate-x-[-25%]  h-full   blur-2xl  md:blur-3xl bg-black  "></div>
       <div className="relative flex items-center flex-col z-4 justify-center  gap-y-4 mb-8  ">
         <div className=" relative flex items-center  h-full mt-20 justify-center gap-0   ">
           <div className="absolute inset-8 -z-2  bg-evening-sea-930"></div>

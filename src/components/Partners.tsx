@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Marquee } from "./Marquee";
 import { AnimatePresence, motion } from "framer-motion";
 import { useColorContext } from "@/context/color";
+import { mixColors } from "@/utils/colorUtils";
 
 const partners = [
   {
@@ -153,7 +154,7 @@ export const Partners = () => {
               key={index}
               onMouseEnter={() => {
                 setActivePartner(partner);
-                setColor(partner.color);
+                setColor(mixColors(partner.color, "#ffffff", 0.7, 1));
                 setIsOpen(true);
               }}
               onMouseLeave={setPartnerTonull}

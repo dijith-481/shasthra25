@@ -7,6 +7,7 @@ import { GlitchText } from "./GlitchText";
 import { Particle } from "./Particle";
 import { useWindowSize } from "../hooks/useWindowSize";
 import { isMobileDevice } from "../utils/isMobile";
+import Link from "next/link";
 
 const COLOR_PALETTE = [
   "bg-cyan-500",
@@ -74,7 +75,7 @@ export const ShasthraHypeCard = () => {
       id="hypeCard"
       className="relative w-full    overflow-visible h-full    py-20 flex flex-col justify-center items-center overflow-x-clip"
     >
-      <div className="absolute top-0 left-0  z-1 w-[200vw] translate-x-[-25%]  h-full   blur-2xl  md:blur-3xl bg-evening-sea-950  "></div>
+      <div className="absolute top-0 left-0  z-1 w-[200vw] translate-x-[-25%]  h-full   blur-2xl  md:blur-3xl bg-black  "></div>
 
       <div className="w-full min-h-full flex flex-col justify-center items-center z-10 px-4 flex-5/6">
         <p className="font-sans text-base md:text-lg text-evening-sea-400/70 tracking-[0.2em] uppercase ">
@@ -104,6 +105,30 @@ export const ShasthraHypeCard = () => {
           </div>
           <div className="z-1">
             <GlitchText />
+          </div>
+          <div
+            className="flex items-center z-1 gap-2 text-3xl justify-center flex-row my-4 
+            tracking-tighter bg-gradient-to-r  leading-none from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent select-none"
+          >
+            <Link
+              className="hover:text-white transition-colors ease-linear duration-500 "
+              href="/events"
+            >
+              Events
+            </Link>
+
+            <Link
+              className="hover:text-white transition-colors ease-linear duration-500 "
+              href="/competitions"
+            >
+              Competitions
+            </Link>
+            <Link
+              className="hover:text-white transition-colors ease-linear duration-500 "
+              href="/schedule"
+            >
+              Schedule
+            </Link>
           </div>
         </div>
       </div>

@@ -76,7 +76,7 @@ export const Marquee: React.FC<MarqueeProps> = ({
         {marqueeItems.map((item, index) => (
           <div key={index} className=" w-full  h-full  rounded-xl aspect-video">
             <div
-              className="flex items-center justify-center h-full w-24 px-2 py-0.5 rounded-xl text-sm text-evening-sea-950  "
+              className="flex items-center justify-center h-full w-24 px-2 py-0.5 rounded-xl text-sm text-black  "
               style={{
                 backgroundColor: item.color,
               }}

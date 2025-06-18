@@ -45,8 +45,9 @@ export function ItemsList({ items, loading, filters, name }: ItemListProps) {
 
   useEffect(() => {
     if (!itemRef.current) return;
-    itemRef.current?.addEventListener("scroll", handleScroll);
-    return () => itemRef.current?.removeEventListener("scroll", handleScroll);
+    const current = itemRef.current;
+    current.addEventListener("scroll", handleScroll);
+    return () => current.removeEventListener("scroll", handleScroll);
   }, [itemRef, loading]);
 
   const visibleItems = useMemo(() => {
@@ -104,7 +105,7 @@ export function ItemsList({ items, loading, filters, name }: ItemListProps) {
     else if (activeElement > visibleItems.length - 1)
       setActive(visibleItems[visibleItems.length - 1].id);
     else setActive(visibleItems[activeElement].id);
-  }, [scrollPosition, visibleItems]);
+  }, [scrollPosition, visibleItems, isMobile]);
 
   useEffect(() => {
     setActive(null);
@@ -114,7 +115,7 @@ export function ItemsList({ items, loading, filters, name }: ItemListProps) {
     if (activeItem) {
       setColor(activeItem.color);
     }
-  }, [activeItem]);
+  }, [activeItem, setColor]);
 
   return (
     <main className="bg-gradient-to-b md:pt-18 h-dvh   pt-10 from-evening-sea-950 to-evening-sea-930">
@@ -172,29 +173,27 @@ export function ItemsList({ items, loading, filters, name }: ItemListProps) {
             Loading {name.toLowerCase()}...
           </div>
         ) : (
-          <>
-            <div
-              ref={itemRef}
-              className="h-full max-w-4xl text-black gap-4    mb-18   overflow-y-scroll p-4 w-full flex flex-wrap   justify-center
+          <div
+            ref={itemRef}
+            className="h-full max-w-4xl text-black gap-4    mb-18   overflow-y-scroll p-4 w-full flex flex-wrap   justify-center
 
                 "
-              style={{
-                paddingTop:
-                  isMobile && itemRef.current
-                    ? itemRef.current.clientHeight / 2 + "px"
-                    : "96px",
-              }}
-            >
-              {visibleItems.map((item) => (
-                <ItemCard
-                  key={item.id}
-                  item={item}
-                  setActive={setActive}
-                  name={name}
-                />
-              ))}
-            </div>
-          </>
+            style={{
+              paddingTop:
+                isMobile && itemRef.current
+                  ? itemRef.current.clientHeight / 2 + "px"
+                  : "96px",
+            }}
+          >
+            {visibleItems.map((item) => (
+              <ItemCard
+                key={item.id}
+                item={item}
+                setActive={setActive}
+                name={name}
+              />
+            ))}
+          </div>
         )}
         <div className="absolute bottom-4 h-12 flex gap-2 flex-row justify-center items-center">
           <div className="hidden md:flex overflow-hidden h-full backdrop-blur-md text-black  rounded-full bg-white/70 items-center justify-center">

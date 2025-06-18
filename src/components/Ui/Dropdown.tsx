@@ -118,7 +118,7 @@ export default function DropDown({
     <div
       ref={dropdownRef}
       id="dropdown"
-      className="fixed bg-white/70 flex min-w-24 flex-col backdrop-blur-lg rounded-3xl overflow-hidden z-[9999] transform-3d"
+      className="fixed bg-white/70 flex  min-w-fit flex-col backdrop-blur-lg rounded-3xl overflow-hidden z-[9999] transform-3d"
       style={{
         top: position.top,
         left: position.left,

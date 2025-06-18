@@ -37,7 +37,7 @@ export default function ItemCard({
         setColor(item.color);
       }}
       onMouseLeave={() => setActive(null)}
-      className="relative group block outline-none w-68 p-2 h-86 rounded-3xl backdrop-blur-3xl bg-white/75 hover:bg-white/30 duration-500 transition-all   "
+      className="relative group block  outline-none w-68 p-2 h-86 rounded-3xl translate-z-0  backface-hidden backdrop-blur-3xl bg-white/75 will-change-transform hover:bg-white/30 duration-500 transition-all   "
       tabIndex={0}
     >
       <div className="absolute top-4 right-4   leading-none font-black text-sm text-black">
